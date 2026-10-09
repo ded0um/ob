@@ -2,392 +2,146 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Découvrez les chats proposés à l'adoption par l'association Ô Bonheur des Nanouts dans la Somme.">
-  <meta name="theme-color" content="#71866b">
-  <title>Chats à l'adoption | Ô Bonheur des Nanouts</title>
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    #chats-adoption {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .chat-card {
-      min-width: 0;
-      overflow: hidden;
-      border-radius: 14px;
-      background: #fff;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, .10);
-    }
-
-    .chat-card > img {
-      display: block;
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-    }
-
-    .chat-card-content {
-      padding: 20px;
-      overflow-wrap: anywhere;
-    }
-
-    .chat-card h2 {
-      margin-top: 0;
-      margin-bottom: 12px;
-    }
-
-    .chat-infos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 15px;
-    }
-
-    .chat-badge {
-      padding: 6px 10px;
-      border-radius: 20px;
-      background: #edf2e9;
-      color: #425640;
-      font-size: .9rem;
-    }
-
-    .chat-description p {
-      margin-bottom: 12px;
-    }
-
-    #etat-adoption {
-      margin: 25px 0;
-    }
-
-    @media (max-width: 700px) {
-      #chats-adoption {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .chat-card > img {
-        height: 240px;
-      }
-
-      .chat-card-content {
-        padding: 16px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Découvrez les chats à l'adoption de l'association Ô Bonheur des Nanouts.">
+<meta name="theme-color" content="#71866b">
+<title>Chats à l'adoption | Ô Bonheur des Nanouts</title>
+<link rel="stylesheet" href="style.css">
+<style>
+#liste-chats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:25px;margin-top:30px}
+.chat-card{min-width:0;overflow:hidden;border-radius:14px;background:#fff;box-shadow:0 4px 15px #0002}
+.chat-card>img{display:block;width:100%;height:260px;object-fit:cover}
+.chat-card-content{padding:20px;overflow-wrap:anywhere}
+.chat-card h2{margin:0 0 12px}
+.chat-infos{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}
+.chat-badge{padding:6px 10px;border-radius:20px;background:#edf2e9;color:#425640;font-size:.9rem}
+#etat-chats{margin:25px 0}
+@media(max-width:700px){#liste-chats{grid-template-columns:1fr;gap:20px}.chat-card>img{height:240px}.chat-card-content{padding:16px}}
+</style>
 </head>
-
 <body>
-
 <a class="skip-link" href="#contenu">Aller au contenu</a>
-
-<header class="site-header">
-  <div class="header-inner">
-    <a class="brand" href="index.html" aria-label="Ô Bonheur des Nanouts, accueil">
-      <img src="images/logo.png" alt="Logo Ô Bonheur des Nanouts">
-      <span>Ô Bonheur<br>des Nanouts</span>
-    </a>
-
-    <button class="nav-toggle" type="button"
-      aria-expanded="false" aria-controls="menu-principal">
-      ☰ Menu
-    </button>
-
-    <nav class="main-nav" id="menu-principal" aria-label="Navigation principale">
-      <a href="index.html">Accueil</a>
-      <a href="sauvetages.html">Nos sauvetages</a>
-      <a href="adoption.html" aria-current="page">Chats à l'adoption</a>
-      <a href="familles.html">Ils ont trouvé leur famille</a>
-      <a href="actualites.html">Nos actualités</a>
-      <a href="partenaires.html">Nos partenaires</a>
-      <a href="faq.html">FAQ</a>
-      <a class="nav-donate" href="faire-un-don.html">♡ Faire un don</a>
-    </nav>
-  </div>
-</header>
-
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="index.html" aria-label="Accueil Ô Bonheur des Nanouts"><img src="images/logo.png" alt="Logo Ô Bonheur des Nanouts"><span>Ô Bonheur<br>des Nanouts</span></a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">☰ Menu</button>
+<nav class="main-nav" id="menu-principal" aria-label="Navigation principale">
+<a href="index.html">Accueil</a><a href="index.html#association">L'association</a><a href="sauvetages.html">Nos sauvetages</a><a href="adoption.html" aria-current="page">Chats à l'adoption</a><a href="familles.html">Ils ont trouvé leur famille</a><a href="actualites.html">Nos actualités</a><a href="partenaires.html">Nos partenaires</a><a href="faq.html">FAQ</a><a class="nav-donate" href="faire-un-don.html">♡ Faire un don</a>
+</nav></div></header>
 <main id="contenu">
-
-  <section class="page-hero">
-    <div class="container">
-      <div class="eyebrow">Une famille pour la vie</div>
-      <h1>Chats à l'adoption</h1>
-      <p class="lead">
-        Ils attendent une famille aimante qui leur offrira sécurité,
-        douceur et une nouvelle chance.
-      </p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container content">
-
-      <h2>Nos petits protégés cherchent une famille</h2>
-      <p>
-        Chaque chat a son histoire et son caractère.
-        Découvrez nos protégés et contactez-nous pour en savoir plus sur une adoption.
-      </p>
-
-      <p id="etat-adoption" role="status" aria-live="polite">
-        Chargement des chats à l'adoption…
-      </p>
-
-      <div id="chats-adoption"></div>
-
-      <div class="paw-divider" aria-hidden="true">
-        🐾　·　🐾　·　🐾
-      </div>
-
-      <h2>Vous souhaitez adopter ?</h2>
-      <p>
-        L'adoption est un engagement important. Contactez l'association
-        pour échanger sur le chat qui vous intéresse et connaître les modalités.
-      </p>
-
-      <div class="actions">
-        <a class="btn btn-primary"
-           href="mailto:obonheurdesnanouts@gmail.com?subject=Demande%20d'adoption">
-          Nous contacter
-        </a>
-        <a class="btn btn-secondary" href="faire-un-don.html">
-          Soutenir l'association
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <strong>Ô Bonheur des Nanouts</strong>
-    ·
-    <a href="mailto:obonheurdesnanouts@gmail.com">
-      obonheurdesnanouts@gmail.com
-    </a>
-    <br>
-    <span>© <span id="year">2026</span> Ô Bonheur des Nanouts</span>
-  </div>
-</footer>
-
-<a class="btn floating-donate" href="faire-un-don.html"
-   aria-label="Faire un don à l'association">
-  ♡ Faire un don
-</a>
-
-<div class="photo-modal" aria-hidden="true" role="dialog"
-     aria-label="Photo agrandie">
-  <button type="button" aria-label="Fermer la photo">×</button>
-  <img src="" alt="">
-</div>
-
+<section class="page-hero"><div class="container"><div class="eyebrow">Une famille pour la vie</div><h1>Chats à l'adoption</h1><p class="lead">Ils attendent une famille aimante qui leur offrira sécurité, douceur et une nouvelle chance.</p></div></section>
+<section class="section"><div class="container content">
+<h2>Nos petits protégés cherchent une famille</h2>
+<p>Découvrez nos protégés et contactez-nous pour en savoir plus sur une adoption.</p>
+<p id="etat-chats" role="status" aria-live="polite">Chargement des chats à l'adoption…</p>
+<div id="liste-chats"></div>
+<div class="paw-divider" aria-hidden="true">🐾　·　🐾　·　🐾</div>
+<h2>Vous souhaitez adopter ?</h2>
+<p>L'adoption est un engagement important. Contactez l'association pour connaître les modalités.</p>
+<div class="actions"><a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject=Demande%20d'adoption">Nous contacter</a><a class="btn btn-secondary" href="faire-un-don.html">Soutenir l'association</a></div>
+</div></section></main>
+<footer class="site-footer"><div class="footer-inner"><strong>Ô Bonheur des Nanouts</strong> · <a href="mailto:obonheurdesnanouts@gmail.com">obonheurdesnanouts@gmail.com</a><br><span>© <span id="year">2026</span> Ô Bonheur des Nanouts</span></div></footer>
+<a class="btn floating-donate" href="faire-un-don.html" aria-label="Faire un don">♡ Faire un don</a>
+<div class="photo-modal" aria-hidden="true" role="dialog" aria-label="Photo agrandie"><button type="button" aria-label="Fermer la photo">×</button><img src="" alt=""></div>
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year").textContent=new Date().getFullYear();
+const depot="ded0um/ob";
+const dossier="_chats";
+const cheminSite="/ob";
+const zone=document.getElementById("liste-chats");
+const etat=document.getElementById("etat-chats");
 
-const depot = "ded0um/ob";
-const dossier = "_adoption";
-const cheminSite = "/ob";
-
-const zoneChats = document.getElementById("chats-adoption");
-const etat = document.getElementById("etat-adoption");
-
-function echapper(texte) {
-  return String(texte ?? "").replace(/[&<>"']/g, caractere => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[caractere]);
+function echapper(t){
+ return String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-
-function lireChamp(metadata, nom) {
-  const ligne = metadata
-    .split(/\r?\n/)
-    .find(ligne => ligne.startsWith(nom + ":"));
-
-  return ligne
-    ? ligne.slice(nom.length + 1).trim().replace(/^["']|["']$/g, "").trim()
-    : "";
+function lireFicheMarkdown(texte){
+ const m=texte.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)([\s\S]*)$/);
+ if(!m)return null;
+ const lignes=m[1].split(/\r?\n/), obj={};
+ for(let i=0;i<lignes.length;i++){
+  const r=lignes[i].match(/^([A-Za-z0-9_-]+):(?:\s*(.*))?$/);
+  if(!r)continue;
+  const cle=r[1], valeur=(r[2]||"").trim();
+  if(["|",">","|-",">-","|+",">+"].includes(valeur)){
+   const bloc=[];i++;
+   while(i<lignes.length&&(/^\s+/.test(lignes[i])||lignes[i].trim()==="")){
+    bloc.push(lignes[i].replace(/^\s{2,}/,""));i++;
+   }
+   i--;
+   obj[cle]=valeur.startsWith(">")?bloc.join(" ").trim():bloc.join("\n").trim();
+  }else{
+   obj[cle]=valeur.replace(/^(['"])([\s\S]*)\1$/,"$2").trim();
+  }
+ }
+ obj.corps=m[2].trim();
+ return obj;
 }
-
-function cheminImage(chemin) {
-  if (!chemin) return "";
-
-  if (/^https?:\/\//i.test(chemin)) return chemin;
-
-  return cheminSite + "/" + chemin.replace(/^\/+/, "");
+function statutNormalise(s){
+ return String(s||"").trim().toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 }
-
-function afficherDate(date) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
-
-  const [annee, mois, jour] = date.split("-").map(Number);
-
-  return new Date(annee, mois - 1, jour).toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
+function cheminImage(p){
+ if(!p)return "";
+ if(/^https?:\/\//i.test(p))return p;
+ return cheminSite+"/"+p.replace(/^\/+/,"");
 }
-
-function texteEnParagraphes(texte) {
-  return texte.trim()
-    .split(/\n\s*\n/)
-    .filter(paragraphe => paragraphe.trim())
-    .map(paragraphe =>
-      "<p>" + echapper(paragraphe).replace(/\n/g, "<br>") + "</p>"
-    ).join("");
+function dateFr(d){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(d||""))return d||"";
+ const[a,m,j]=d.split("-").map(Number);
+ return new Date(a,m-1,j).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
 }
-
-async function lireChat(fichier) {
-  const reponse = await fetch(fichier.download_url);
-  if (!reponse.ok) throw new Error("Impossible de lire une fiche.");
-
-  const contenu = await reponse.text();
-  const morceaux = contenu.match(
-    /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/
-  );
-
-  if (!morceaux) return null;
-
-  const metadata = morceaux[1];
-  const corps = morceaux[2].trim();
-
-  return {
-    titre: lireChamp(metadata, "title"),
-    date: lireChamp(metadata, "date"),
-    image: lireChamp(metadata, "image"),
-    age: lireChamp(metadata, "age"),
-    sexe: lireChamp(metadata, "sexe"),
-    caractere: lireChamp(metadata, "caractere"),
-    conditions: lireChamp(metadata, "conditions"),
-    body: lireChamp(metadata, "body") || corps
-  };
+function paragraphes(t){
+ return String(t||"").trim().split(/\n\s*\n/).filter(x=>x.trim())
+ .map(x=>"<p>"+echapper(x).replace(/\n/g,"<br>")+"</p>").join("");
 }
-
-function afficherChat(chat) {
-  const carte = document.createElement("article");
-  carte.className = "chat-card";
-
-  const photo = cheminImage(chat.image);
-
-  let contenu = "";
-
-  if (photo) {
-    contenu += '<img src="' + echapper(photo) +
-      '" alt="Photo de ' + echapper(chat.titre) +
-      '" loading="lazy">';
-  }
-
-  contenu += '<div class="chat-card-content">';
-  contenu += '<h2>' + echapper(chat.titre) + '</h2>';
-  contenu += '<div class="chat-infos">';
-
-  if (chat.age) {
-    contenu += '<span class="chat-badge">🐱 Âge : ' +
-      echapper(chat.age) + '</span>';
-  }
-
-  if (chat.sexe) {
-    contenu += '<span class="chat-badge">' +
-      echapper(chat.sexe) + '</span>';
-  }
-
-  if (chat.date) {
-    contenu += '<span class="chat-badge">Publié le ' +
-      echapper(afficherDate(chat.date)) + '</span>';
-  }
-
-  contenu += '</div>';
-
-  if (chat.caractere) {
-    contenu += '<div class="chat-description">' +
-      texteEnParagraphes(chat.caractere) + '</div>';
-  }
-
-  if (chat.conditions) {
-    contenu += '<h3>Conditions d’adoption</h3>' +
-      '<div class="chat-description">' +
-      texteEnParagraphes(chat.conditions) + '</div>';
-  }
-
-  if (chat.body) {
-    contenu += '<div class="chat-description">' +
-      texteEnParagraphes(chat.body) + '</div>';
-  }
-
-  contenu += '<div class="actions">' +
-    '<a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject=' +
-    encodeURIComponent("Demande d'adoption : " + chat.titre) +
-    '">Me renseigner sur ce chat</a></div>';
-
-  contenu += '</div>';
-  carte.innerHTML = contenu;
-  zoneChats.appendChild(carte);
+async function lireChat(f){
+ const r=await fetch(f.download_url);
+ if(!r.ok)throw Error("Lecture impossible : "+f.name);
+ const o=lireFicheMarkdown(await r.text());
+ if(!o)return null;
+ return {
+  titre:o.title||"",date:o.date||"",image:o.image||"",statut:o.statut||"",
+  age:o.age||"",sexe:o.sexe||"",caractere:o.caractere||"",
+  conditions:o.conditions||"",histoire:o.histoire||"",
+  body:o.body||o.corps||""
+ };
 }
-
-async function chargerChats() {
-  try {
-    const url = "https://api.github.com/repos/" +
-      depot + "/contents/" + dossier + "?ref=main";
-
-    const reponse = await fetch(url);
-
-    if (!reponse.ok) {
-      throw new Error("Erreur GitHub (HTTP " + reponse.status + ").");
-    }
-
-    const fichiers = await reponse.json();
-
-    if (!Array.isArray(fichiers)) {
-      throw new Error("Le dossier _adoption est introuvable.");
-    }
-
-    const markdown = fichiers.filter(fichier =>
-      fichier.type === "file" && fichier.name.endsWith(".md")
-    );
-
-    const chats = await Promise.all(markdown.map(async fichier => {
-      try {
-        return await lireChat(fichier);
-      } catch (erreur) {
-        console.error(erreur);
-        return null;
-      }
-    }));
-
-    const valides = chats
-      .filter(chat => chat && chat.titre)
-      .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-
-    zoneChats.replaceChildren();
-
-    if (valides.length === 0) {
-      etat.textContent =
-        "Aucun chat n'est actuellement présenté à l'adoption. Revenez bientôt !";
-      return;
-    }
-
-    valides.forEach(afficherChat);
-    etat.hidden = true;
-
-  } catch (erreur) {
-    console.error(erreur);
-    etat.textContent =
-      "Impossible de charger les chats. " + erreur.message;
-  }
+function afficherChat(chat){
+ const carte=document.createElement("article");
+ carte.className="chat-card";
+ let html="";
+ const photo=cheminImage(chat.image);
+ if(photo)html+='<img src="'+echapper(photo)+'" alt="Photo de '+echapper(chat.titre)+'" loading="lazy">';
+ html+='<div class="chat-card-content"><h2>'+echapper(chat.titre)+'</h2><div class="chat-infos">';
+ if(chat.age)html+='<span class="chat-badge">🐱 Âge : '+echapper(chat.age)+'</span>';
+ if(chat.sexe)html+='<span class="chat-badge">'+echapper(chat.sexe)+'</span>';
+ if(chat.date)html+='<span class="chat-badge">Publié le '+echapper(dateFr(chat.date))+'</span>';
+ html+='</div>';
+ if(chat.caractere)html+='<div>'+paragraphes(chat.caractere)+'</div>';
+ if(chat.conditions)html+='<h3>Conditions d’adoption</h3>'+paragraphes(chat.conditions);
+ if(chat.histoire)html+='<h3>Son histoire</h3>'+paragraphes(chat.histoire);
+ if(chat.body)html+=paragraphes(chat.body);
+ html+='<div class="actions"><a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject='+encodeURIComponent("Demande d'adoption : "+chat.titre)+'">Me renseigner sur ce chat</a></div></div>';
+ carte.innerHTML=html;
+ zone.appendChild(carte);
 }
-
+async function chargerChats(){
+ try{
+  const r=await fetch("https://api.github.com/repos/"+depot+"/contents/"+dossier+"?ref=main");
+  if(!r.ok)throw Error("Erreur GitHub HTTP "+r.status+". Vérifie que le dossier _chats existe.");
+  const fichiers=await r.json();
+  if(!Array.isArray(fichiers))throw Error("Le dossier _chats est introuvable.");
+  const markdown=fichiers.filter(f=>f.type==="file"&&f.name.endsWith(".md"));
+  const resultats=await Promise.all(markdown.map(f=>lireChat(f).catch(e=>{console.error(e);return null;})));
+  const chats=resultats.filter(c=>c&&c.titre&&statutNormalise(c.statut)==="a l'adoption")
+   .sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  zone.replaceChildren();
+  if(!chats.length){etat.textContent="Aucun chat n'est actuellement présenté à l'adoption. Revenez bientôt !";return;}
+  chats.forEach(afficherChat);
+  etat.hidden=true;
+ }catch(e){console.error(e);etat.textContent="Impossible de charger les chats. "+e.message;}
+}
 chargerChats();
 </script>
-
 <script src="script.js"></script>
 </body>
 </html>
