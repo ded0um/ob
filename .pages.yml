@@ -1,3 +1,4 @@
+
 media:
   input: images
   output: /images
@@ -16,7 +17,7 @@ content:
         required: true
 
       - name: date
-        label: Date
+        label: Date du sauvetage
         type: date
         required: true
 
@@ -30,7 +31,7 @@ content:
         type: rich-text
         required: true
 
-# TOUS LES CHATS
+  # TOUS LES CHATS : ADOPTION ET FAMILLES
   - name: chats
     label: Tous les chats
     type: collection
@@ -41,14 +42,21 @@ content:
         label: Nom du chat
         type: string
         required: true
+
       - name: date
         label: Date de publication
         type: date
         required: true
+
+      - name: date_adoption
+        label: Date d'adoption
+        type: date
+
       - name: image
         label: Photo du chat
         type: image
         required: true
+
       - name: statut
         label: Statut du chat
         type: select
@@ -57,9 +65,11 @@ content:
             - À l'adoption
             - Adopté
         required: true
+
       - name: age
         label: Âge du chat
         type: string
+
       - name: sexe
         label: Sexe du chat
         type: select
@@ -68,15 +78,19 @@ content:
             - Femelle
             - Mâle
             - Inconnu
+
       - name: caractere
         label: Caractère et description
         type: rich-text
+
       - name: conditions
         label: Conditions d'adoption
         type: rich-text
+
       - name: histoire
         label: Son histoire
         type: rich-text
+
       - name: body
         label: Informations complémentaires
         type: rich-text
