@@ -1,9 +1,10 @@
-
+```yaml
 media:
-  input: images/sauvetages
-  output: /images/sauvetages
+  input: images
+  output: /images
 
 content:
+  # NOS SAUVETAGES
   - name: sauvetages
     label: Nos sauvetages
     type: collection
@@ -26,4 +27,70 @@ content:
         label: Histoire du sauvetage
         type: rich-text
         required: true
-        
+
+  # CHATS À L'ADOPTION
+  - name: adoption
+    label: Chats à l'adoption
+    type: collection
+    path: _adoption
+    filename: "{primary}.md"
+    fields:
+      - name: title
+        label: Nom du chat
+        type: string
+        required: true
+      - name: date
+        label: Date de publication
+        type: date
+        required: true
+      - name: image
+        label: Photo du chat
+        type: image
+        required: true
+      - name: age
+        label: Âge du chat
+        type: string
+        required: true
+      - name: sexe
+        label: Sexe
+        type: select
+        options:
+          values:
+            - Femelle
+            - Mâle
+            - Inconnu
+      - name: caractere
+        label: Caractère et description
+        type: rich-text
+        required: true
+      - name: conditions
+        label: Conditions d'adoption
+        type: rich-text
+      - name: body
+        label: Informations complémentaires
+        type: rich-text
+
+  # ILS ONT TROUVÉ LEUR FAMILLE
+  - name: familles
+    label: Ils ont trouvé leur famille
+    type: collection
+    path: _familles
+    filename: "{primary}.md"
+    fields:
+      - name: title
+        label: Nom du chat
+        type: string
+        required: true
+      - name: date
+        label: Date d'adoption ou de publication
+        type: date
+        required: true
+      - name: image
+        label: Photo du chat
+        type: image
+        required: true
+      - name: histoire
+        label: Son histoire
+        type: rich-text
+        required: true
+```
