@@ -6,74 +6,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Faire un don | Ô Bonheur des Nanouts</title>
-  <meta name="description" content="Soutenez Ô Bonheur des Nanouts et aidez-nous à soigner, nourrir, identifier et stériliser les chats errants.">
+  <meta name="description" content="Aidez Ô Bonheur des Nanouts à soigner, nourrir, identifier et stériliser les chats errants grâce à votre don.">
 
+  <!-- Styles communs du site -->
   <link rel="stylesheet" href="style.css">
 
+  <!-- Styles réservés au contenu de cette page -->
   <style>
-    :root {
-      --vert-sauge: #71866B;
-      --vert-profond: #53694F;
-      --creme: #F5F2E8;
-      --creme-clair: #FBFAF6;
-      --texte: #394338;
-    }
-
-    /* Fond général de la page */
-    body {
-      background-color: var(--creme);
-      color: var(--texte);
-    }
-
-    /* Présentation principale */
     .donation-page {
       width: 100%;
-      padding: 55px 24px 75px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 45px 24px 65px;
       box-sizing: border-box;
     }
 
     .donation-layout {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
-      gap: 65px;
+      gap: 55px;
       align-items: start;
     }
 
-    /* Colonne de gauche */
     .donation-text {
-      padding: 25px 0;
+      min-width: 0;
+      padding: 15px 0;
     }
 
     .donation-label {
       display: inline-block;
       margin-bottom: 18px;
       padding: 8px 15px;
-      border-radius: 30px;
-      background: #E5EADD;
-      color: var(--vert-profond);
+      border-radius: 25px;
+      background: #e5eadd;
+      color: #53694f;
       font-size: 14px;
       font-weight: 600;
     }
 
     .donation-text h1 {
       margin: 0 0 22px;
-      color: var(--vert-profond);
-      font-size: clamp(32px, 4vw, 48px);
-      line-height: 1.18;
+      color: #53694f;
+      font-size: clamp(30px, 3.5vw, 46px);
+      line-height: 1.2;
     }
 
-    .donation-text .intro {
-      margin-bottom: 22px;
-      font-size: 17px;
-      line-height: 1.9;
+    .donation-text p {
+      font-size: 16px;
+      line-height: 1.85;
     }
 
     .donation-text h2 {
-      margin: 32px 0 15px;
-      color: var(--vert-profond);
+      margin: 30px 0 18px;
+      color: #53694f;
       font-size: 24px;
     }
 
@@ -85,8 +70,8 @@
 
     .donation-list li {
       display: flex;
-      gap: 13px;
       align-items: flex-start;
+      gap: 13px;
       margin-bottom: 18px;
       line-height: 1.7;
     }
@@ -99,60 +84,55 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: #E5EADD;
+      background: #e5eadd;
       font-size: 19px;
     }
 
     .donation-list strong {
-      color: var(--vert-profond);
+      color: #53694f;
     }
 
     .donation-quote {
-      margin-top: 32px;
-      padding: 22px 24px;
-      border-left: 4px solid var(--vert-sauge);
-      border-radius: 0 12px 12px 0;
-      background: var(--creme-clair);
+      margin-top: 28px;
+      padding: 18px 22px;
+      border-left: 4px solid #71866b;
+      border-radius: 0 10px 10px 0;
+      background: #f5f2e8;
       line-height: 1.8;
     }
 
-    .donation-quote strong {
-      color: var(--vert-profond);
+    .donation-quote strong,
+    .donation-signature {
+      color: #53694f;
     }
 
     .donation-signature {
-      margin-top: 28px;
-      color: var(--vert-profond);
+      margin-top: 25px;
       font-weight: 600;
-      font-size: 17px;
+      line-height: 1.8;
     }
 
-    /* Colonne de droite : formulaire */
+    /* Colonne HelloAsso */
     .donation-form {
       min-width: 0;
-      padding-top: 12px;
+      padding-top: 15px;
     }
 
     .donation-form h2 {
-      margin: 0 0 10px;
-      color: var(--vert-profond);
-      font-size: 27px;
-      line-height: 1.3;
+      margin: 0 0 12px;
+      color: #53694f;
+      font-size: 28px;
       text-align: center;
     }
 
     .donation-form .form-intro {
-      margin: 0 auto 18px;
-      max-width: 380px;
+      margin: 0 auto 20px;
+      max-width: 400px;
       text-align: center;
-      line-height: 1.7;
       font-size: 15px;
+      line-height: 1.7;
     }
 
-    /*
-      Pas de grande carte blanche.
-      Le widget conserve une largeur raisonnable.
-    */
     .helloasso-container {
       width: 100%;
       max-width: 440px;
@@ -170,52 +150,47 @@
       max-width: 440px;
       min-height: 650px;
       margin: 0 auto;
-      padding: 0;
-      border: none;
+      border: 0;
       background: transparent;
     }
 
-    .form-note {
-      margin: 12px auto 0;
+    .donation-form .form-note {
+      margin: 15px auto 0;
       max-width: 390px;
       text-align: center;
       font-size: 13px;
       line-height: 1.7;
-      opacity: 0.85;
     }
 
-    /* Bas de page */
     .donation-bottom {
-      max-width: 900px;
-      margin: 55px auto 0;
-      padding: 25px 20px;
-      border-top: 1px solid #D8DECF;
+      margin: 45px auto 0;
+      padding: 25px 15px;
+      border-top: 1px solid #d8dece;
       text-align: center;
       line-height: 1.8;
     }
 
     .donation-bottom h2 {
-      color: var(--vert-profond);
+      color: #53694f;
       font-size: 25px;
     }
 
-    /* Adaptation tablette et téléphone */
     @media (max-width: 850px) {
       .donation-page {
-        padding: 30px 18px 50px;
+        padding: 30px 18px 45px;
       }
 
       .donation-layout {
         grid-template-columns: minmax(0, 1fr);
-        gap: 28px;
+        gap: 25px;
       }
 
       .donation-text {
-        padding: 5px 0 0;
+        padding: 0;
       }
 
       .donation-text h1 {
-        font-size: clamp(30px, 7vw, 42px);
+        font-size: clamp(30px, 7vw, 40px);
       }
 
       .donation-form {
@@ -239,11 +214,13 @@
 
 <body>
 
+  <!-- EN-TÊTE COMMUN DU SITE -->
   <header class="site-header">
     <div class="container header-inner">
 
       <a class="brand" href="index.html" aria-label="Accueil Ô Bonheur des Nanouts">
-        <img src="images/logo.png" alt="Logo Ô Bonheur des Nanouts">
+        <img src="images/logo.png" alt="Logo de l'association">
+        <span>Ô Bonheur<br>des Nanouts</span>
       </a>
 
       <button class="menu-toggle" type="button"
@@ -262,9 +239,7 @@
         <a href="faq.html">FAQ</a>
       </nav>
 
-      <a class="header-donate" href="faire-un-don.html">
-        Faire un don 🐾
-      </a>
+      <a class="nav-donate" href="faire-un-don.html">Faire un don 🐾</a>
 
     </div>
   </header>
@@ -273,30 +248,31 @@
 
     <div class="donation-layout">
 
-      <!-- COLONNE GAUCHE : TEXTE -->
+      <!-- GAUCHE : PRÉSENTATION ET UTILITÉ DES DONS -->
       <section class="donation-text">
 
-        <span class="donation-label">💚 Votre générosité fait la différence</span>
+        <span class="donation-label">
+          💚 Votre générosité fait la différence
+        </span>
 
         <h1>Ensemble, offrons une seconde chance aux chats oubliés</h1>
 
-        <p class="intro">
+        <p>
           L'association <strong>Ô Bonheur des Nanouts</strong> vient en aide
           aux chats errants et abandonnés, principalement dans la Somme.
           Notre mission est de les protéger, de prendre soin d'eux et de leur
           offrir de meilleures conditions de vie.
         </p>
 
-        <p class="intro">
-          Chaque jour, les besoins sont nombreux. Votre soutien nous permet
-          de poursuivre nos actions et de venir en aide aux chats qui en ont
-          le plus besoin.
+        <p>
+          Grâce à votre soutien, nous pouvons continuer nos actions et aider
+          les chats qui en ont le plus besoin. Chaque participation compte,
+          quel que soit son montant.
         </p>
 
         <h2>🐾 À quoi servent vos dons ?</h2>
 
         <ul class="donation-list">
-
           <li>
             <span class="donation-icon">🩺</span>
             <span>
@@ -325,17 +301,16 @@
             <span class="donation-icon">❤️</span>
             <span>
               <strong>Leur bien-être</strong><br>
-              Pour financer le matériel et les accessoires nécessaires.
+              Pour le matériel et les accessoires nécessaires.
             </span>
           </li>
-
         </ul>
 
         <div class="donation-quote">
           <strong>Chaque geste compte !</strong><br>
-          5 €, 15 €, 30 € ou le montant de votre choix : chaque don,
-          petit ou grand, nous aide à continuer. Ensemble, nos gestes
-          peuvent faire une vraie différence.
+          5 €, 15 €, 30 € ou le montant de votre choix :
+          chaque don nous aide à poursuivre nos actions.
+          Ensemble, nous pouvons faire une vraie différence.
         </div>
 
         <p class="donation-signature">
@@ -345,18 +320,17 @@
 
       </section>
 
-      <!-- COLONNE DROITE : HELLOASSO -->
+      <!-- DROITE : FORMULAIRE HELLOASSO -->
       <section class="donation-form" aria-labelledby="donation-form-heading">
 
         <h2 id="donation-form-heading">Je fais un don</h2>
 
         <p class="form-intro">
           Choisissez librement le montant de votre participation
-          directement dans le formulaire sécurisé HelloAsso.
+          dans le formulaire HelloAsso.
         </p>
 
         <div class="helloasso-container">
-
           <iframe
             id="haWidgetLight"
             title="Formulaire de don HelloAsso - Ô Bonheur des Nanouts"
@@ -365,7 +339,6 @@
             scrolling="auto"
             src="https://www.helloasso.com/associations/obonheurdesnanouts/formulaires/3/widget?view=form">
           </iframe>
-
         </div>
 
         <p class="form-note">
@@ -378,16 +351,17 @@
     </div>
 
     <section class="donation-bottom">
-      <h2>💚 Merci de faire partie de cette belle solidarité</h2>
+      <h2>💚 Merci pour votre solidarité</h2>
       <p>
         Grâce à vous, nous pouvons continuer à protéger, soigner et nourrir
         les chats aidés par Ô Bonheur des Nanouts.
       </p>
-      <p><strong>Un grand merci pour eux ! 🐾</strong></p>
+      <strong>Un grand merci pour eux ! 🐾</strong>
     </section>
 
   </main>
 
+  <!-- PIED DE PAGE COMMUN -->
   <footer class="site-footer">
     <div class="container">
       <p>
@@ -406,15 +380,15 @@
     </div>
   </footer>
 
-  <a class="floating-donate" href="faire-un-don.html">
-    Faire un don 🐾
+  <!-- MÊME BOUTON FLOTTANT QUE SUR LES AUTRES PAGES -->
+  <a class="btn floating-donate" href="faire-un-don.html">
+    ♡ Faire un don
   </a>
 
   <script src="script.js"></script>
 
   <script>
     const yearElement = document.getElementById("current-year");
-
     if (yearElement) {
       yearElement.textContent = new Date().getFullYear();
     }
