@@ -6,51 +6,179 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Ô Bonheur des Nanouts | Association loi 1901</title>
-  <meta name="description" content="Ô Bonheur des Nanouts, association loi 1901 qui vient en aide aux chats dans le besoin, accompagne les sauvetages et les adoptions.">
+  <meta name="description" content="Ô Bonheur des Nanouts, association loi 1901 qui vient en aide aux chats dans le besoin et accompagne les sauvetages et les adoptions.">
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Styles propres à la page d'accueil uniquement -->
+  <!-- Styles réservés à l'intérieur de la page d'accueil -->
   <style>
-    .association-label {
+    /* ACCUEIL */
+    #contenu > .hero {
+      padding: 3.2rem 1rem 2.8rem;
+      background: linear-gradient(180deg, #edf1e7 0%, #f7f6ef 100%);
+      border-bottom: 1px solid #e4e5dc;
+    }
+
+    #contenu .hero-logo {
+      width: min(175px, 42vw);
+      aspect-ratio: 1;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto .8rem;
+    }
+
+    #contenu .hero h1 {
+      margin: .5rem auto .65rem;
+    }
+
+    #contenu .association-label {
       margin: 0 auto;
-      color: var(--muted);
+      color: #687064;
       font-size: .95rem;
       font-weight: 600;
       letter-spacing: .04em;
     }
 
-    /* Bouton de don contrasté */
-    .main-nav .nav-donate {
-      background: #d8b9aa;
-      color: #49372f;
-      border: 1px solid #d8b9aa;
-      font-weight: 800;
+    /* SÉPARATION DES SECTIONS */
+    #contenu > #association {
+      background: #fffdf8;
     }
 
-    .main-nav .nav-donate:hover {
-      background: #f0ddd4;
-      color: #49372f;
+    #contenu > .section-soft {
+      background: #e8eee4;
     }
 
-    .donation-box .btn,
-    .floating-donate {
+    #contenu > .section:not(.section-soft):not(.hero) {
+      background: #fbf8f1;
+    }
+
+    #contenu > .section {
+      position: relative;
+      padding: 4.2rem 0;
+    }
+
+    /* TITRES */
+    #contenu .section-head {
+      max-width: 740px;
+      margin: 0 auto 2.5rem;
+      text-align: center;
+    }
+
+    #contenu .section-head h2 {
+      margin-top: .45rem;
+      margin-bottom: .9rem;
+    }
+
+    #contenu .section-head p {
+      max-width: 670px;
+      margin: 0 auto;
+      color: #687064;
+    }
+
+    /* CARTES */
+    #contenu .grid {
+      gap: 1.25rem;
+    }
+
+    #contenu .card {
+      padding: 1.6rem;
+      background: #fffdf8;
+      border: 1px solid #e2e6dc;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(44, 59, 41, .055);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    #contenu .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(44, 59, 41, .1);
+    }
+
+    #contenu .card-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: .8rem;
+      border-radius: 15px;
+      background: #e8eee4;
+      color: #42583f;
+      font-size: 1.5rem;
+    }
+
+    #contenu .card h3 {
+      margin-top: 0;
+    }
+
+    #contenu .card p {
+      margin-bottom: .9rem;
+      color: #566052;
+    }
+
+    #contenu .card a {
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    /* BOUTONS DES SECTIONS */
+    #contenu .actions {
+      margin-top: 2rem;
+    }
+
+    #contenu .btn {
+      text-align: center;
+    }
+
+    /* BLOC DES DONS */
+    #contenu .donation-box {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      background: #42583f;
+      border-radius: 28px;
+      box-shadow: 0 14px 32px rgba(44, 59, 41, .12);
+    }
+
+    #contenu .donation-box .eyebrow {
+      color: #f0d7cc;
+    }
+
+    #contenu .donation-box h2 {
+      margin-top: .6rem;
+      color: #fff;
+    }
+
+    #contenu .donation-box p {
+      max-width: 650px;
+      margin: 0 auto 1.5rem;
+      color: #f3f5ef;
+    }
+
+    #contenu .donation-box .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .85rem 1.5rem;
       background: #f0d7cc;
       color: #49372f;
       border: 2px solid #f0d7cc;
+      border-radius: 999px;
       font-weight: 800;
       text-decoration: none;
-      box-shadow: 0 5px 18px rgba(0, 0, 0, .14);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, .12);
+      transition: background .2s ease, transform .2s ease;
     }
 
-    .donation-box .btn:hover,
-    .floating-donate:hover {
+    #contenu .donation-box .btn:hover {
       background: #fff1e9;
       color: #49372f;
+      transform: translateY(-2px);
     }
 
-    /* Contact élégant */
-    .contact-links {
+    /* CONTACT */
+    #contenu .contact-links {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
@@ -58,67 +186,113 @@
       margin: 0 auto;
     }
 
-    .contact-link {
+    #contenu .contact-link {
       display: flex;
       align-items: center;
       gap: .8rem;
       min-width: 0;
-      padding: 1.1rem;
-      background: var(--paper);
-      border: 1px solid var(--line);
+      padding: 1.15rem;
+      background: #fffdf8;
+      border: 1px solid #dfe4d9;
       border-radius: 18px;
-      color: var(--ink);
+      color: #30382f;
       text-decoration: none;
       box-shadow: 0 6px 20px rgba(44, 59, 41, .05);
       transition: transform .2s ease, box-shadow .2s ease;
     }
 
-    .contact-link:hover,
-    .contact-link:focus-visible {
+    #contenu .contact-link:hover,
+    #contenu .contact-link:focus-visible {
       transform: translateY(-3px);
-      box-shadow: var(--shadow);
+      box-shadow: 0 12px 25px rgba(44, 59, 41, .1);
     }
 
-    .contact-icon {
+    #contenu .contact-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex: 0 0 42px;
       width: 42px;
       height: 42px;
-      display: grid;
-      place-items: center;
       border-radius: 14px;
-      background: var(--sage-light);
-      color: var(--sage-dark);
+      background: #e8eee4;
+      color: #42583f;
       font-size: 1.2rem;
       font-weight: 800;
     }
 
-    .contact-text {
+    #contenu .contact-text {
       display: flex;
       flex-direction: column;
       min-width: 0;
     }
 
-    .contact-text strong {
-      color: var(--sage-dark);
+    #contenu .contact-text strong {
+      color: #42583f;
       font-size: .94rem;
     }
 
-    .contact-text small {
-      color: var(--muted);
+    #contenu .contact-text small {
+      color: #687064;
       font-size: .78rem;
       line-height: 1.4;
     }
 
-    .contact-arrow {
+    #contenu .contact-arrow {
       margin-left: auto;
-      color: var(--sage);
+      color: #71866b;
       flex-shrink: 0;
     }
 
+    /* BOUTON DE DON FLOTTANT */
+    .floating-donate {
+      background: #f0d7cc !important;
+      color: #49372f !important;
+      border: 2px solid #f0d7cc !important;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, .16);
+    }
+
+    .floating-donate:hover {
+      background: #fff1e9 !important;
+      color: #49372f !important;
+    }
+
+    /* AFFICHAGE SUR TÉLÉPHONE */
     @media (max-width: 750px) {
-      .contact-links {
+      #contenu > .section {
+        padding: 3.2rem 0;
+      }
+
+      #contenu .section-head {
+        margin-bottom: 1.8rem;
+      }
+
+      #contenu .contact-links {
         grid-template-columns: 1fr;
         max-width: 480px;
+      }
+
+      #contenu .contact-link {
+        padding: 1rem;
+      }
+
+      #contenu .donation-box {
+        padding: 2rem 1.1rem;
+        border-radius: 22px;
+      }
+
+      #contenu .card {
+        padding: 1.3rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #contenu .card,
+      #contenu .contact-link,
+      #contenu .donation-box .btn {
+        transition: none;
       }
     }
   </style>
@@ -128,7 +302,7 @@
 
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-  <!-- EN-TÊTE CONSERVÉ -->
+  <!-- EN-TÊTE EXISTANT -->
   <header class="site-header">
     <div class="header-inner">
 
@@ -161,6 +335,7 @@
     </div>
   </header>
 
+  <!-- CONTENU DE LA PAGE D'ACCUEIL -->
   <main id="contenu">
 
     <!-- ACCUEIL -->
@@ -223,7 +398,7 @@
 
         </div>
 
-        <div class="actions" style="margin-top:2rem">
+        <div class="actions">
           <a class="btn btn-primary" href="sauvetages.html">
             Découvrir nos actions →
           </a>
@@ -279,7 +454,7 @@
 
         </div>
 
-        <div class="actions" style="margin-top:2rem">
+        <div class="actions">
           <a class="btn btn-secondary" href="actualites.html">
             Toutes nos actualités
           </a>
@@ -293,9 +468,7 @@
       <div class="container">
 
         <div class="donation-box">
-          <span class="eyebrow" style="color:#f0d7cc">
-            Chaque geste compte
-          </span>
+          <span class="eyebrow">Chaque geste compte</span>
 
           <h2>Ensemble, aidons-les</h2>
 
@@ -366,7 +539,7 @@
 
   </main>
 
-  <!-- PIED DE PAGE CONSERVÉ -->
+  <!-- PIED DE PAGE EXISTANT -->
   <footer class="site-footer">
     <div class="footer-inner">
 
@@ -387,12 +560,12 @@
     </div>
   </footer>
 
-  <!-- BOUTON DE DON FIXE CONSERVÉ -->
+  <!-- BOUTON DE DON FLOTTANT -->
   <a class="floating-donate" href="faire-un-don.html">
     Faire un don ♥
   </a>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS EXISTANTS -->
   <script src="script.js"></script>
 
   <script>
