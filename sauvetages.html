@@ -1,71 +1,82 @@
-
+```html
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Découvrez les missions de sauvetage et de protection féline de Ô Bonheur des Nanouts.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Découvrez les sauvetages de chats de l'association Ô Bonheur des Nanouts dans la Somme.">
   <meta name="theme-color" content="#71866b">
   <title>Nos sauvetages | Ô Bonheur des Nanouts</title>
   <link rel="stylesheet" href="style.css">
 
   <style>
+    /* Grille des articles */
     #articles-sauvetages {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 25px;
+      margin-top: 30px;
     }
 
+    /* Carte d'un sauvetage */
     .sauvetage-card {
-      overflow: hidden;
-      background: #fffdf8;
-      border: 1px solid #e4e5dc;
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(44, 59, 41, .07);
-    }
-
-    .sauvetage-card img {
-      display: block;
+      min-width: 0;
       width: 100%;
-      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      margin: 0;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+    }
+
+    /* Photos de taille uniforme */
+    .sauvetage-card img {
+      width: 100%;
+      height: 240px;
       object-fit: cover;
-      cursor: zoom-in;
+      display: block;
+      cursor: pointer;
     }
 
+    /* Contenu des cartes */
     .sauvetage-card-content {
-      padding: 1.4rem;
-    }
-
-    .sauvetage-card time {
-      color: #687064;
-      font-size: .88rem;
-    }
-
-    .sauvetage-card h3 {
-      margin: .6rem 0 1rem;
-      color: #42583f;
-    }
-
-    .sauvetage-histoire {
-      line-height: 1.75;
+      padding: 20px;
       overflow-wrap: anywhere;
     }
 
+    .sauvetage-card time {
+      display: block;
+      margin-bottom: 8px;
+      color: #71866b;
+      font-size: 0.9rem;
+    }
+
+    .sauvetage-card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
     .sauvetage-histoire p {
-      margin: 0 0 1rem;
+      margin-bottom: 12px;
     }
 
-    .sauvetage-status {
-      padding: 1rem;
-      background: #e8eee4;
-      border-radius: 14px;
-      text-align: center;
+    #etat-sauvetages {
+      margin: 25px 0;
     }
 
-    @media (max-width: 600px) {
+    /* Une seule colonne sur téléphone */
+    @media (max-width: 700px) {
+      #articles-sauvetages {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .sauvetage-card img {
+        height: 220px;
+      }
+
       .sauvetage-card-content {
-        padding: 1.1rem;
+        padding: 16px;
       }
     }
   </style>
@@ -84,9 +95,7 @@
     </a>
 
     <button class="nav-toggle" type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false"
-      aria-controls="menu-principal">
+      aria-expanded="false" aria-controls="menu-principal">
       ☰ Menu
     </button>
 
@@ -131,40 +140,41 @@
             ou une recherche de solution adaptée.
           </p>
           <p>
-            La stérilisation et l'identification font également partie des
-            moyens essentiels pour améliorer durablement la situation des chats.
+            La stérilisation et l'identification font également partie
+            des moyens essentiels pour améliorer durablement la situation des chats.
           </p>
         </div>
 
         <div class="placeholder">
-          Chaque vie compte 🐾
+          Chaque sauvetage compte 🐾
+          <br>
+          <span class="note">Découvrez les histoires de nos protégés ci-dessous.</span>
         </div>
       </div>
 
-      <div class="paw-divider" aria-hidden="true">🐾　·　🐾　·　🐾</div>
+      <div class="paw-divider" aria-hidden="true">
+        🐾　·　🐾　·　🐾
+      </div>
 
       <h2>Les histoires de nos protégés</h2>
       <p>
-        Retrouvez ici les sauvetages racontés par notre association.
+        Découvrez les chats que nous aidons et leur parcours vers une vie meilleure.
       </p>
 
-      <p id="etat-sauvetages" class="sauvetage-status" role="status">
+      <p id="etat-sauvetages" role="status" aria-live="polite">
         Chargement des histoires de nos protégés…
       </p>
 
       <div id="articles-sauvetages"></div>
 
-      <noscript>
-        <p>Activez JavaScript pour afficher les articles de sauvetage.</p>
-      </noscript>
-
-      <div class="paw-divider" aria-hidden="true">🐾　·　🐾　·　🐾</div>
+      <div class="paw-divider" aria-hidden="true">
+        🐾　·　🐾　·　🐾
+      </div>
 
       <h2>Un soutien précieux</h2>
       <p>
         Chaque geste aide l'association à poursuivre ses actions :
-        don financier, nourriture, litière, matériel ou partage des actualités.
-        Merci pour votre soutien.
+        don financier, nourriture, litière, matériel ou partage de nos actualités.
       </p>
 
       <div class="actions">
@@ -179,7 +189,8 @@
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <strong>Ô Bonheur des Nanouts</strong> ·
+    <strong>Ô Bonheur des Nanouts</strong>
+    ·
     <a href="mailto:obonheurdesnanouts@gmail.com">
       obonheurdesnanouts@gmail.com
     </a>
@@ -189,191 +200,206 @@
 </footer>
 
 <a class="btn floating-donate" href="faire-un-don.html"
-  aria-label="Faire un don à l'association">
+   aria-label="Faire un don à l'association">
   ♡ Faire un don
 </a>
 
-<div class="photo-modal" aria-hidden="true" role="dialog" aria-label="Photo agrandie">
+<div class="photo-modal" aria-hidden="true" role="dialog"
+     aria-label="Photo agrandie">
   <button type="button" aria-label="Fermer la photo">×</button>
   <img src="" alt="">
 </div>
 
-<script src="script.js"></script>
-
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
 
-  const depot = "ded0um/ob";
-  const dossier = "_sauvetages";
-  const cheminSite = "/ob";
+const depot = "ded0um/ob";
+const dossier = "_sauvetages";
+const cheminSite = "/ob";
 
-  const zoneArticles = document.getElementById("articles-sauvetages");
-  const etat = document.getElementById("etat-sauvetages");
+const zoneArticles = document.getElementById("articles-sauvetages");
+const etat = document.getElementById("etat-sauvetages");
 
-  function echapper(texte) {
-    return String(texte ?? "").replace(/[&<>"']/g, c => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[c]);
+function echapper(texte) {
+  return String(texte ?? "").replace(/[&<>"']/g, caractere => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[caractere]);
+}
+
+function lireChamp(metadata, nom) {
+  const ligne = metadata
+    .split(/\r?\n/)
+    .find(ligne => ligne.startsWith(nom + ":"));
+
+  return ligne
+    ? ligne.slice(nom.length + 1).trim().replace(/^["']|["']$/g, "")
+    : "";
+}
+
+function cheminImage(chemin) {
+  if (!chemin) return "";
+
+  if (/^https?:\/\//i.test(chemin)) {
+    return chemin;
   }
 
-  function lireChamp(metadata, nom) {
-    const ligne = metadata.split(/\r?\n/)
-      .find(l => l.startsWith(nom + ":"));
+  return cheminSite + "/" + chemin.replace(/^\/+/, "");
+}
 
-    return ligne
-      ? ligne.slice(nom.length + 1).trim().replace(/^["']|["']$/g, "")
-      : "";
+function afficherDate(date) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return date;
   }
 
-  function cheminImage(chemin) {
-    if (!chemin) return "";
+  const [annee, mois, jour] = date.split("-").map(Number);
 
-    if (/^https?:\/\//i.test(chemin)) {
-      return chemin;
-    }
+  return new Date(annee, mois - 1, jour).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+}
 
-    return cheminSite + "/" + chemin.replace(/^\/+/, "");
+function afficherHistoire(texte) {
+  return texte
+    .trim()
+    .split(/\n\s*\n/)
+    .filter(paragraphe => paragraphe.trim())
+    .map(paragraphe =>
+      "<p>" +
+      echapper(paragraphe).replace(/\n/g, "<br>") +
+      "</p>"
+    )
+    .join("");
+}
+
+async function lireArticle(fichier) {
+  const reponse = await fetch(fichier.download_url);
+
+  if (!reponse.ok) {
+    throw new Error("Lecture de l'article impossible.");
   }
 
-  function afficherDate(date) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
+  const contenu = await reponse.text();
 
-    const [annee, mois, jour] = date.split("-").map(Number);
+  const morceaux = contenu.match(
+    /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/
+  );
 
-    return new Date(annee, mois - 1, jour).toLocaleDateString("fr-FR", {
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    });
-  }
+  if (!morceaux) return null;
 
-  function afficherHistoire(texte) {
-    return texte.trim()
-      .split(/\n\s*\n/)
-      .map(p =>
-        "<p>" + echapper(p).replace(/\n/g, "<br>") + "</p>"
-      )
-      .join("");
-  }
+  const metadata = morceaux[1];
 
-  async function lireArticle(fichier) {
-    const reponse = await fetch(fichier.download_url);
+  return {
+    titre: lireChamp(metadata, "title"),
+    date: lireChamp(metadata, "date"),
+    image: lireChamp(metadata, "image"),
+    histoire: morceaux[2].trim()
+  };
+}
+
+function afficherArticle(article) {
+  const carte = document.createElement("article");
+  carte.className = "sauvetage-card";
+
+  const photo = cheminImage(article.image);
+
+  carte.innerHTML =
+    (photo
+      ? '<img src="' + echapper(photo) +
+        '" alt="Photo de ' + echapper(article.titre) +
+        '" loading="lazy">'
+      : "") +
+
+    '<div class="sauvetage-card-content">' +
+
+    (article.date
+      ? '<time datetime="' + echapper(article.date) + '">' +
+        echapper(afficherDate(article.date)) +
+        '</time>'
+      : "") +
+
+    '<h3>' + echapper(article.titre) + '</h3>' +
+
+    '<div class="sauvetage-histoire">' +
+    afficherHistoire(article.histoire) +
+    '</div>' +
+
+    '</div>';
+
+  zoneArticles.appendChild(carte);
+}
+
+async function chargerSauvetages() {
+  try {
+    const url =
+      "https://api.github.com/repos/" +
+      depot +
+      "/contents/" +
+      dossier +
+      "?ref=main";
+
+    const reponse = await fetch(url);
 
     if (!reponse.ok) {
-      throw new Error("Lecture de l'article impossible.");
+      throw new Error(
+        "GitHub n'a pas pu fournir les articles (HTTP " +
+        reponse.status + ")."
+      );
     }
 
-    const contenu = await reponse.text();
+    const fichiers = await reponse.json();
 
-    const morceaux = contenu.match(
-      /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/
+    if (!Array.isArray(fichiers)) {
+      throw new Error("Le dossier des sauvetages est introuvable.");
+    }
+
+    const markdown = fichiers.filter(fichier =>
+      fichier.type === "file" &&
+      fichier.name.endsWith(".md")
     );
 
-    if (!morceaux) return null;
+    const articles = await Promise.all(
+      markdown.map(async fichier => {
+        try {
+          return await lireArticle(fichier);
+        } catch (erreur) {
+          console.error(erreur);
+          return null;
+        }
+      })
+    );
 
-    const metadata = morceaux[1];
+    const valides = articles
+      .filter(article => article && article.titre)
+      .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
-    return {
-      titre: lireChamp(metadata, "title"),
-      date: lireChamp(metadata, "date"),
-      image: lireChamp(metadata, "image"),
-      histoire: morceaux[2].trim()
-    };
-  }
+    zoneArticles.replaceChildren();
 
-  function afficherArticle(article) {
-    const carte = document.createElement("article");
-    carte.className = "sauvetage-card";
-
-    const photo = cheminImage(article.image);
-
-    carte.innerHTML =
-      (photo
-        ? '<img src="' + echapper(photo) +
-          '" alt="Photo de ' + echapper(article.titre) +
-          '" loading="lazy">'
-        : "") +
-      '<div class="sauvetage-card-content">' +
-        (article.date
-          ? '<time datetime="' + echapper(article.date) + '">' +
-            echapper(afficherDate(article.date)) + '</time>'
-          : "") +
-        '<h3>' + echapper(article.titre) + '</h3>' +
-        '<div class="sauvetage-histoire">' +
-          afficherHistoire(article.histoire) +
-        '</div>' +
-      '</div>';
-
-    zoneArticles.appendChild(carte);
-  }
-
-  async function chargerSauvetages() {
-    try {
-      const url =
-        "https://api.github.com/repos/" + depot +
-        "/contents/" + dossier + "?ref=main";
-
-      const reponse = await fetch(url);
-
-      if (!reponse.ok) {
-        throw new Error(
-          "GitHub n'a pas pu fournir les articles (HTTP " +
-          reponse.status + ")."
-        );
-      }
-
-      const fichiers = await reponse.json();
-
-      if (!Array.isArray(fichiers)) {
-        throw new Error("Le dossier des sauvetages est introuvable.");
-      }
-
-      const markdown = fichiers.filter(f =>
-        f.type === "file" && f.name.endsWith(".md")
-      );
-
-      const articles = await Promise.all(
-        markdown.map(async fichier => {
-          try {
-            return await lireArticle(fichier);
-          } catch (erreur) {
-            console.error(erreur);
-            return null;
-          }
-        })
-      );
-
-      const valides = articles
-        .filter(a => a && a.titre)
-        .sort((a, b) =>
-          (b.date || "").localeCompare(a.date || "")
-        );
-
-      zoneArticles.replaceChildren();
-
-      if (valides.length === 0) {
-        etat.textContent =
-          "Aucun article valide trouvé dans le dossier des sauvetages.";
-        return;
-      }
-
-      valides.forEach(afficherArticle);
-      etat.hidden = true;
-
-    } catch (erreur) {
-      console.error(erreur);
-
+    if (valides.length === 0) {
       etat.textContent =
-        "Impossible de charger les sauvetages. " + erreur.message;
+        "Aucun article trouvé pour le moment. Revenez bientôt découvrir nos sauvetages.";
+      return;
     }
-  }
 
-  chargerSauvetages();
+    valides.forEach(afficherArticle);
+    etat.hidden = true;
+
+  } catch (erreur) {
+    console.error(erreur);
+    etat.textContent =
+      "Impossible de charger les sauvetages. " + erreur.message;
+  }
+}
+
+chargerSauvetages();
 </script>
 
+<script src="script.js"></script>
 </body>
 </html>
+```
