@@ -1,0 +1,37 @@
+# Site Ô Bonheur des Nanouts
+
+Site statique en français, conçu pour GitHub Pages.
+
+## Fichiers
+- `index.html` : page d'accueil
+- `adoption.html` : chats à l'adoption
+- `familles.html` : chats qui ont trouvé leur famille
+- `sauvetages.html` : présentation des sauvetages
+- `actualites.html` : collectes, campagnes, événements et appels aux dons
+- `partenaires.html` : emplacements des logos partenaires
+- `faq.html` : questions fréquentes
+- `faire-un-don.html` : page de dons
+- `style.css` et `script.js` : apparence et interactions
+- `images/` : dossier prévu pour le logo et les photos
+
+## Avant publication
+1. Place le logo de l'association dans le dossier `images` et nomme-le `logo.png`. Si tu gardes un autre nom, remplace `images/logo.png` dans les fichiers HTML.
+2. Remplace les exemples des chats par leurs vraies photos, prénoms, âges, caractères, statuts et informations d'adoption.
+3. Ajoute le lien public officiel Yapla dans `faire-un-don.html`. Le site ne contient pas de lien Yapla inventé.
+4. Remplace les emplacements « Logo partenaire à ajouter » par les logos autorisés des partenaires.
+5. Complète les actualités et les histoires d'adoption au fur et à mesure.
+
+## Publication sur GitHub Pages
+1. Décompresse l'archive sur ton ordinateur.
+2. Ouvre le dépôt `ob.github.io` sur GitHub.
+3. Téléverse les fichiers et le dossier `images` à la racine du dépôt (pas dans un sous-dossier).
+4. Valide avec **Commit changes**.
+5. Dans **Settings > Pages**, vérifie que GitHub Pages publie depuis la branche `main`, dossier `/(root)`.
+6. Le site sera disponible à `https://ob.github.io` après le temps de publication.
+
+## Notes
+- Le site utilise uniquement HTML, CSS et JavaScript : pas de base de données ni de formulaire de contact.
+- Les liens e-mail ouvrent l'application de messagerie du visiteur.
+- Les boutons « Partager » ouvrent le partage Facebook de la page actuelle.
+- Les photos agrandissables doivent être des images HTML avec l'attribut `data-enlarge`.
+- Le bouton Yapla doit être relié à l'adresse officielle de la page de dons avant de considérer les dons en ligne comme opérationnels.
