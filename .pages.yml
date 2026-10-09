@@ -59,7 +59,12 @@ content:
 
       - name: sexe
         label: Sexe du chat
-        type: string
+        type: select
+        options:
+          values:
+            - Femelle
+            - Mâle
+            - Inconnu
         required: true
 
       - name: caractere
