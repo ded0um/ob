@@ -297,7 +297,7 @@ async function lireArticle(fichier) {
   return {
     titre: lireChamp(metadata, "title"),
     date: lireChamp(metadata, "date"),
-    image: lireChamp(metadata, "image"),
+    image: lireChamp(metadata, "image").replace(/^["']|["']$/g, "").trim(),
     histoire: morceaux[2].trim()
   };
 }
