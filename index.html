@@ -1,18 +1,347 @@
 
-<!-- ACCUEIL -->
-<section class="hero">
-  <div class="container">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <img
-      class="hero-logo"
-      src="images/logo.png"
-      alt="Logo de l'association Ô Bonheur des Nanouts">
+  <title>Ô Bonheur des Nanouts | Association loi 1901</title>
 
-    <h1>Ô Bonheur des Nanouts</h1>
+  <meta
+    name="description"
+    content="Découvrez Ô Bonheur des Nanouts, notre association qui vient en aide aux chats, organise des sauvetages et accompagne les adoptions."
+  >
 
-    <p class="association-label">
-      Association de protection féline · Loi 1901
-    </p>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-  </div>
-</section>
+<body>
+
+  <a class="skip-link" href="#contenu">
+    Aller au contenu
+  </a>
+
+  <!-- EN-TÊTE -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a class="brand" href="index.html" aria-label="Accueil Ô Bonheur des Nanouts">
+        <img src="images/logo.png" alt="Logo Ô Bonheur des Nanouts">
+        <span>Ô Bonheur des Nanouts</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="menu-principal"
+      >
+        ☰ Menu
+      </button>
+
+      <nav class="main-nav" id="menu-principal" aria-label="Menu principal">
+        <a href="index.html" aria-current="page">Accueil</a>
+        <a href="index.html#association">L'association</a>
+        <a href="sauvetages.html">Nos sauvetages</a>
+        <a href="adoption.html">Chats à l'adoption</a>
+        <a href="familles.html">Ils ont trouvé leur famille</a>
+        <a href="actualites.html">Nos actualités</a>
+        <a href="partenaires.html">Nos partenaires</a>
+        <a href="faq.html">FAQ</a>
+        <a class="nav-donate" href="faire-un-don.html">Faire un don</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main id="contenu">
+
+    <!-- ACCUEIL -->
+    <section class="hero">
+      <div class="container">
+
+        <img
+          class="hero-logo"
+          src="images/logo.png"
+          alt="Logo de Ô Bonheur des Nanouts"
+        >
+
+        <h1>Ô Bonheur des Nanouts</h1>
+
+        <p class="association-label">
+          Association loi 1901
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- PRÉSENTATION -->
+    <section class="section" id="association">
+      <div class="container">
+
+        <div class="section-head">
+          <span class="eyebrow">Qui sommes-nous ?</span>
+          <h2>Une association engagée</h2>
+
+          <p>
+            Ô Bonheur des Nanouts œuvre pour venir en aide aux chats
+            dans le besoin, leur apporter des soins et leur offrir
+            la possibilité de trouver une famille aimante.
+          </p>
+        </div>
+
+        <div class="grid">
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🐾</div>
+            <h3>Protection animale</h3>
+            <p>
+              Nous agissons pour aider les chats abandonnés,
+              errants ou en situation de détresse.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">❤️</div>
+            <h3>Soins et bien-être</h3>
+            <p>
+              Nous recherchons les ressources nécessaires pour
+              les soins vétérinaires, l'alimentation et le confort
+              des chats que nous accompagnons.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🏡</div>
+            <h3>Prévention</h3>
+            <p>
+              Nous encourageons la stérilisation, l'identification
+              et les adoptions responsables.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="actions" style="margin-top: 2rem;">
+          <a class="btn btn-primary" href="sauvetages.html">
+            Découvrir nos actions
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- NOS CHATS ET NOS ACTIONS -->
+    <section class="section section-soft">
+      <div class="container">
+
+        <div class="section-head">
+          <span class="eyebrow">Nos actions</span>
+          <h2>Découvrez nos chats</h2>
+
+          <p>
+            Chaque chat mérite une chance. Découvrez nos actions,
+            nos protégés et les belles histoires de ceux qui ont
+            trouvé leur famille.
+          </p>
+        </div>
+
+        <div class="grid">
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🐱</div>
+            <h3>Nos sauvetages</h3>
+            <p>
+              Retrouvez les histoires de nos interventions et
+              les nouvelles de nos petits protégés.
+            </p>
+            <a href="sauvetages.html">Découvrir nos sauvetages →</a>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🏡</div>
+            <h3>Chats à l'adoption</h3>
+            <p>
+              Découvrez les chats qui attendent une famille
+              pour commencer une nouvelle vie.
+            </p>
+            <a href="adoption.html">Voir les chats à l'adoption →</a>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">💚</div>
+            <h3>Ils ont trouvé leur famille</h3>
+            <p>
+              Découvrez les belles histoires de nos chats
+              qui ont trouvé leur foyer pour la vie.
+            </p>
+            <a href="familles.html">Lire leurs histoires →</a>
+          </article>
+
+        </div>
+
+        <div class="actions" style="margin-top: 2rem;">
+          <a class="btn btn-secondary" href="actualites.html">
+            Nos dernières actualités
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- DONS -->
+    <section class="section">
+      <div class="container">
+
+        <div class="donation-box">
+          <span class="eyebrow" style="color: #e3eadb;">
+            Votre aide compte
+          </span>
+
+          <h2>Aidez-nous à protéger les chats</h2>
+
+          <p>
+            Chaque don contribue à financer les soins vétérinaires,
+            l'alimentation et les besoins de nos protégés.
+            Merci pour votre soutien et votre générosité.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn-secondary" href="faire-un-don.html">
+              Faire un don
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="section section-soft">
+      <div class="container">
+
+        <div class="section-head">
+          <span class="eyebrow">Restons en contact</span>
+          <h2>Nous contacter</h2>
+
+          <p>
+            Une question, une proposition d'aide ou envie de soutenir
+            notre association ? Nous serons ravis d'échanger avec vous.
+          </p>
+        </div>
+
+        <div class="grid">
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">✉️</div>
+            <h3>Par e-mail</h3>
+            <p>Écrivez-nous pour toute demande.</p>
+            <a href="mailto:obonheurdesnanouts@gmail.com">
+              obonheurdesnanouts@gmail.com
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">📱</div>
+            <h3>Sur Facebook</h3>
+            <p>
+              Suivez nos nouvelles, nos collectes et nos sauvetages.
+            </p>
+            <a
+              href="https://www.facebook.com/share/19uXb3B98p/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Retrouvez-nous sur Facebook →
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">❔</div>
+            <h3>Questions fréquentes</h3>
+            <p>
+              Retrouvez les réponses aux questions les plus courantes
+              sur notre association et nos actions.
+            </p>
+            <a href="faq.html">Consulter la FAQ →</a>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- PIED DE PAGE -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <p>
+        <strong>Ô Bonheur des Nanouts</strong> · Association loi 1901
+      </p>
+
+      <p>
+        Pour nous contacter :
+        <a href="mailto:obonheurdesnanouts@gmail.com">
+          obonheurdesnanouts@gmail.com
+        </a>
+      </p>
+
+      <p>
+        © <span id="annee"></span> Ô Bonheur des Nanouts · Tous droits réservés
+      </p>
+
+    </div>
+  </footer>
+
+
+  <!-- BOUTON DON FIXE -->
+  <a class="floating-donate" href="faire-un-don.html">
+    Faire un don 🐾
+  </a>
+
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
+
+  <script>
+    const annee = document.getElementById("annee");
+
+    if (annee) {
+      annee.textContent = new Date().getFullYear();
+    }
+
+    const menuToggle = document.querySelector(".nav-toggle");
+    const menu = document.querySelector(".main-nav");
+
+    if (menuToggle && menu) {
+      menuToggle.addEventListener("click", function () {
+        const ouvert = menu.classList.toggle("open");
+
+        menuToggle.setAttribute("aria-expanded", String(ouvert));
+        menuToggle.setAttribute(
+          "aria-label",
+          ouvert ? "Fermer le menu" : "Ouvrir le menu"
+        );
+      });
+
+      menu.querySelectorAll("a").forEach(function (lien) {
+        lien.addEventListener("click", function () {
+          menu.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
