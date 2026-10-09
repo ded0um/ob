@@ -1,4 +1,3 @@
-```yaml
 media:
   input: images
   output: /images
@@ -15,14 +14,17 @@ content:
         label: Titre du sauvetage
         type: string
         required: true
+
       - name: date
         label: Date
         type: date
         required: true
+
       - name: image
         label: Photo du chat
         type: image
         required: true
+
       - name: body
         label: Histoire du sauvetage
         type: rich-text
@@ -39,33 +41,36 @@ content:
         label: Nom du chat
         type: string
         required: true
+
       - name: date
         label: Date de publication
         type: date
         required: true
+
       - name: image
         label: Photo du chat
         type: image
         required: true
+
       - name: age
         label: Âge du chat
         type: string
         required: true
+
       - name: sexe
-        label: Sexe
-        type: select
-        options:
-          values:
-            - Femelle
-            - Mâle
-            - Inconnu
+        label: Sexe du chat
+        type: string
+        required: true
+
       - name: caractere
         label: Caractère et description
         type: rich-text
         required: true
+
       - name: conditions
         label: Conditions d'adoption
         type: rich-text
+
       - name: body
         label: Informations complémentaires
         type: rich-text
@@ -81,16 +86,18 @@ content:
         label: Nom du chat
         type: string
         required: true
+
       - name: date
         label: Date d'adoption ou de publication
         type: date
         required: true
+
       - name: image
         label: Photo du chat
         type: image
         required: true
+
       - name: histoire
         label: Son histoire
         type: rich-text
         required: true
-```
