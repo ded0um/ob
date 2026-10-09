@@ -8,29 +8,26 @@
   <title>Faire un don | Ô Bonheur des Nanouts</title>
   <meta name="description" content="Aidez Ô Bonheur des Nanouts à soigner, nourrir, identifier et stériliser les chats errants grâce à votre don.">
 
-  <!-- Styles communs du site -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Styles réservés au contenu de cette page -->
   <style>
     .donation-page {
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
       padding: 45px 24px 65px;
-      box-sizing: border-box;
     }
 
     .donation-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
-      gap: 55px;
-      align-items: start;
+      display: block;
+      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
     }
 
     .donation-text {
       min-width: 0;
-      padding: 15px 0;
+      padding: 15px 0 0;
     }
 
     .donation-label {
@@ -38,15 +35,15 @@
       margin-bottom: 18px;
       padding: 8px 15px;
       border-radius: 25px;
-      background: #e5eadd;
-      color: #53694f;
+      background: var(--sage-light);
+      color: var(--sage-dark);
       font-size: 14px;
       font-weight: 600;
     }
 
     .donation-text h1 {
       margin: 0 0 22px;
-      color: #53694f;
+      color: var(--sage-dark);
       font-size: clamp(30px, 3.5vw, 46px);
       line-height: 1.2;
     }
@@ -58,7 +55,7 @@
 
     .donation-text h2 {
       margin: 30px 0 18px;
-      color: #53694f;
+      color: var(--sage-dark);
       font-size: 24px;
     }
 
@@ -84,18 +81,18 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: #e5eadd;
+      background: var(--sage-light);
       font-size: 19px;
     }
 
     .donation-list strong {
-      color: #53694f;
+      color: var(--sage-dark);
     }
 
     .donation-quote {
       margin-top: 28px;
       padding: 18px 22px;
-      border-left: 4px solid #71866b;
+      border-left: 4px solid var(--sage);
       border-radius: 0 10px 10px 0;
       background: #f5f2e8;
       line-height: 1.8;
@@ -103,7 +100,7 @@
 
     .donation-quote strong,
     .donation-signature {
-      color: #53694f;
+      color: var(--sage-dark);
     }
 
     .donation-signature {
@@ -112,15 +109,19 @@
       line-height: 1.8;
     }
 
-    /* Colonne HelloAsso */
+    /* Formulaire HelloAsso dans le fil de la page */
     .donation-form {
+      width: 100%;
+      max-width: 520px;
       min-width: 0;
-      padding-top: 15px;
+      margin: 42px auto 0;
+      padding: 28px 0 0;
+      border-top: 1px solid var(--line);
     }
 
     .donation-form h2 {
       margin: 0 0 12px;
-      color: #53694f;
+      color: var(--sage-dark);
       font-size: 28px;
       text-align: center;
     }
@@ -148,7 +149,7 @@
       display: block;
       width: 100%;
       max-width: 440px;
-      min-height: 650px;
+      height: 700px;
       margin: 0 auto;
       border: 0;
       background: transparent;
@@ -165,24 +166,19 @@
     .donation-bottom {
       margin: 45px auto 0;
       padding: 25px 15px;
-      border-top: 1px solid #d8dece;
+      border-top: 1px solid var(--line);
       text-align: center;
       line-height: 1.8;
     }
 
     .donation-bottom h2 {
-      color: #53694f;
+      color: var(--sage-dark);
       font-size: 25px;
     }
 
     @media (max-width: 850px) {
       .donation-page {
         padding: 30px 18px 45px;
-      }
-
-      .donation-layout {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 25px;
       }
 
       .donation-text {
@@ -194,10 +190,9 @@
       }
 
       .donation-form {
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-        padding-top: 0;
+        max-width: 520px;
+        margin-top: 32px;
+        padding-top: 24px;
       }
 
       .helloasso-container,
@@ -214,7 +209,6 @@
 
 <body>
 
-  <!-- EN-TÊTE COMMUN DU SITE -->
   <header class="site-header">
     <div class="container header-inner">
 
@@ -223,7 +217,7 @@
         <span>Ô Bonheur<br>des Nanouts</span>
       </a>
 
-      <button class="menu-toggle" type="button"
+      <button class="nav-toggle" type="button"
         aria-label="Ouvrir le menu" aria-expanded="false">
         ☰
       </button>
@@ -237,9 +231,8 @@
         <a href="actualites.html">Nos actualités</a>
         <a href="partenaires.html">Nos partenaires</a>
         <a href="faq.html">FAQ</a>
+        <a class="nav-donate" href="faire-un-don.html">Faire un don 🐾</a>
       </nav>
-
-      <a class="nav-donate" href="faire-un-don.html">Faire un don 🐾</a>
 
     </div>
   </header>
@@ -248,7 +241,6 @@
 
     <div class="donation-layout">
 
-      <!-- GAUCHE : PRÉSENTATION ET UTILITÉ DES DONS -->
       <section class="donation-text">
 
         <span class="donation-label">
@@ -320,7 +312,6 @@
 
       </section>
 
-      <!-- DROITE : FORMULAIRE HELLOASSO -->
       <section class="donation-form" aria-labelledby="donation-form-heading">
 
         <h2 id="donation-form-heading">Je fais un don</h2>
@@ -361,7 +352,6 @@
 
   </main>
 
-  <!-- PIED DE PAGE COMMUN -->
   <footer class="site-footer">
     <div class="container">
       <p>
@@ -380,7 +370,6 @@
     </div>
   </footer>
 
-  <!-- MÊME BOUTON FLOTTANT QUE SUR LES AUTRES PAGES -->
   <a class="btn floating-donate" href="faire-un-don.html">
     ♡ Faire un don
   </a>
