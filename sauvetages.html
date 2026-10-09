@@ -1,17 +1,374 @@
+
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Découvrez les missions de sauvetage et de protection féline de Ô Bonheur des Nanouts."><meta name="theme-color" content="#71866b"><title>Nos sauvetages | Ô Bonheur des Nanouts</title><link rel="stylesheet" href="style.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a>
-<header class="site-header"><div class="header-inner">
-<a class="brand" href="index.html" aria-label="Ô Bonheur des Nanouts, accueil"><img src="images/logo.png" alt="Logo Ô Bonheur des Nanouts"><span>Ô Bonheur<br>des Nanouts</span></a>
-<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">☰ Menu</button>
-<nav class="main-nav" id="menu-principal" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="index.html#association">L'association</a><a href="sauvetages.html" aria-current="page">Nos sauvetages</a><a href="adoption.html">Chats à l'adoption</a><a href="familles.html">Ils ont trouvé leur famille</a><a href="actualites.html">Nos actualités</a><a href="partenaires.html">Nos partenaires</a><a href="faq.html">FAQ</a><a class="nav-donate" href="faire-un-don.html">♡ Faire un don</a></nav>
-</div></header><main id="contenu">
-<section class="page-hero"><div class="container"><div class="eyebrow">Chaque vie compte</div><h1>Nos sauvetages</h1><p class="lead">Derrière chaque sauvetage, il y a un chat qui a besoin de sécurité, de soins et d'une chance de retrouver confiance.</p></div></section>
-<section class="section"><div class="container content">
-<div class="split reveal"><div><h2>Agir pour les chats en difficulté</h2><p>Ô Bonheur des Nanouts intervient principalement dans la Somme (80) pour contribuer à la protection des chats en difficulté. Selon chaque situation, l'aide peut nécessiter une mise en sécurité, une évaluation des besoins, des soins vétérinaires, de la nourriture ou une recherche de solution adaptée.</p><p>La stérilisation et l'identification font également partie des moyens essentiels pour améliorer durablement la situation des chats.</p></div><div class="placeholder">Photo d'un sauvetage à ajouter<br><span class="note">Cliquez sur une vraie photo pour l'agrandir.</span></div></div>
-<div class="paw-divider" aria-hidden="true">🐾　·　🐾　·　🐾</div>
-<h2>Un soutien précieux</h2><p>Chaque geste aide l'association à poursuivre ses actions : don financier, nourriture, litière, matériel ou partage des actualités. Les situations urgentes et les appels aux dons seront annoncés dans la rubrique « Nos actualités ».</p><div class="actions"><a class="btn btn-primary" href="faire-un-don.html">Soutenir les chats</a><a class="btn btn-secondary" href="actualites.html">Voir nos actualités</a></div>
-</div></section>
-</main><footer class="site-footer"><div class="footer-inner"><strong>Ô Bonheur des Nanouts</strong> · <a href="mailto:obonheurdesnanouts@gmail.com">obonheurdesnanouts@gmail.com</a><br><span>© <span id="year">2026</span> Ô Bonheur des Nanouts</span></div></footer>
-<a class="btn floating-donate" href="faire-un-don.html" aria-label="Faire un don à l'association">♡ Faire un don</a>
-<div class="photo-modal" aria-hidden="true" role="dialog" aria-label="Photo agrandie"><button type="button" aria-label="Fermer la photo">×</button><img src="" alt=""></div>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script><script src="script.js"></script></body></html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Découvrez les missions de sauvetage et de protection féline de Ô Bonheur des Nanouts.">
+  <meta name="theme-color" content="#71866b">
+  <title>Nos sauvetages | Ô Bonheur des Nanouts</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    #articles-sauvetages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .sauvetage-card {
+      overflow: hidden;
+      background: #fffdf8;
+      border: 1px solid #e4e5dc;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(44, 59, 41, .07);
+    }
+
+    .sauvetage-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+
+    .sauvetage-card-content {
+      padding: 1.4rem;
+    }
+
+    .sauvetage-card time {
+      color: #687064;
+      font-size: .88rem;
+    }
+
+    .sauvetage-card h3 {
+      margin: .6rem 0 1rem;
+      color: #42583f;
+    }
+
+    .sauvetage-histoire {
+      line-height: 1.75;
+      overflow-wrap: anywhere;
+    }
+
+    .sauvetage-status {
+      padding: 1rem;
+      background: #e8eee4;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .sauvetage-vide {
+      padding: 2rem;
+      text-align: center;
+      background: #fffdf8;
+      border-radius: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .sauvetage-card-content {
+        padding: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Ô Bonheur des Nanouts, accueil">
+      <img src="images/logo.png" alt="Logo Ô Bonheur des Nanouts">
+      <span>Ô Bonheur<br>des Nanouts</span>
+    </a>
+
+    <button class="nav-toggle" type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="menu-principal">☰ Menu</button>
+
+    <nav class="main-nav" id="menu-principal" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="sauvetages.html" aria-current="page">Nos sauvetages</a>
+      <a href="adoption.html">Chats à l'adoption</a>
+      <a href="familles.html">Ils ont trouvé leur famille</a>
+      <a href="actualites.html">Nos actualités</a>
+      <a href="partenaires.html">Nos partenaires</a>
+      <a href="faq.html">FAQ</a>
+      <a class="nav-donate" href="faire-un-don.html">♡ Faire un don</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="eyebrow">Chaque vie compte</div>
+      <h1>Nos sauvetages</h1>
+      <p class="lead">
+        Derrière chaque sauvetage, il y a un chat qui a besoin
+        de sécurité, de soins et d'une chance de retrouver confiance.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container content">
+
+      <div class="split reveal">
+        <div>
+          <h2>Agir pour les chats en difficulté</h2>
+          <p>
+            Ô Bonheur des Nanouts intervient principalement dans la Somme (80)
+            pour contribuer à la protection des chats en difficulté.
+            Selon chaque situation, l'aide peut nécessiter une mise en sécurité,
+            une évaluation des besoins, des soins vétérinaires, de la nourriture
+            ou une recherche de solution adaptée.
+          </p>
+          <p>
+            La stérilisation et l'identification font également partie
+            des moyens essentiels pour améliorer durablement la situation des chats.
+          </p>
+        </div>
+
+        <div class="placeholder">
+          Chaque sauvetage compte 🐾
+        </div>
+      </div>
+
+      <div class="paw-divider" aria-hidden="true">🐾　·　🐾　·　🐾</div>
+
+      <h2>Les histoires de nos protégés</h2>
+      <p>
+        Retrouvez ici les sauvetages racontés par notre association.
+      </p>
+
+      <p id="etat-sauvetages" class="sauvetage-status" role="status">
+        Chargement des histoires de nos protégés…
+      </p>
+
+      <div id="articles-sauvetages"></div>
+
+      <noscript>
+        <p>Activez JavaScript pour afficher les articles de sauvetage.</p>
+      </noscript>
+
+      <div class="paw-divider" aria-hidden="true">🐾　·　🐾　·　🐾</div>
+
+      <h2>Un soutien précieux</h2>
+      <p>
+        Chaque geste aide l'association à poursuivre ses actions :
+        don financier, nourriture, litière, matériel ou partage des actualités.
+        Merci pour votre soutien.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="faire-un-don.html">Soutenir les chats</a>
+        <a class="btn btn-secondary" href="actualites.html">Voir nos actualités</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <strong>Ô Bonheur des Nanouts</strong> ·
+    <a href="mailto:obonheurdesnanouts@gmail.com">
+      obonheurdesnanouts@gmail.com
+    </a>
+    <br>
+    <span>© <span id="year">2026</span> Ô Bonheur des Nanouts</span>
+  </div>
+</footer>
+
+<a class="btn floating-donate" href="faire-un-don.html"
+  aria-label="Faire un don à l'association">♡ Faire un don</a>
+
+<div class="photo-modal" aria-hidden="true" role="dialog" aria-label="Photo agrandie">
+  <button type="button" aria-label="Fermer la photo">×</button>
+  <img src="" alt="">
+</div>
+
+<script src="script.js"></script>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const depot = "ded0um/ob";
+  const dossier = "_sauvetages";
+  const cheminSite = "/ob";
+
+  const zoneArticles = document.getElementById("articles-sauvetages");
+  const etat = document.getElementById("etat-sauvetages");
+
+  function echapper(texte) {
+    return String(texte ?? "").replace(/[&<>"']/g, caractere => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[caractere]);
+  }
+
+  function champFrontMatter(contenu, nom) {
+    const expression = new RegExp(
+      "^" + nom + ":\\\\s*[\\\"']?([^\\\\r\\\\n\\\"']*)[\\\"']?\\\\s*$",
+      "m"
+    );
+    const resultat = contenu.match(expression);
+    return resultat ? resultat[1].trim() : "";
+  }
+
+  function imagePublique(chemin) {
+    if (!chemin) return "";
+
+    if (/^https?:\\/\\//i.test(chemin)) {
+      return chemin;
+    }
+
+    const propre = chemin.replace(/^\\/+/, "");
+
+    if (propre.startsWith("ob/")) {
+      return "/" + propre;
+    }
+
+    return cheminSite + "/" + propre;
+  }
+
+  function dateLisible(date) {
+    if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(date)) return date || "";
+
+    const morceaux = date.split("-").map(Number);
+    return new Date(
+      morceaux[0], morceaux[1] - 1, morceaux[2]
+    ).toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+
+  function histoireHTML(texte) {
+    return texte
+      .trim()
+      .split(/\\n\\s*\\n/)
+      .map(paragraphe =>
+        "<p>" + echapper(paragraphe).replace(/\\n/g, "<br>") + "</p>"
+      )
+      .join("");
+  }
+
+  async function lireArticle(fichier) {
+    const reponse = await fetch(fichier.download_url);
+
+    if (!reponse.ok) {
+      throw new Error("Impossible de lire un article.");
+    }
+
+    const contenu = await reponse.text();
+    const morceaux = contenu.match(/^---\\s*\\r?\\n([\\s\\S]*?)\\r?\\n---\\s*\\r?\\n?([\\s\\S]*)$/);
+
+    if (!morceaux) return null;
+
+    const metadata = morceaux[1];
+    const histoire = morceaux[2].trim();
+
+    const titre = champFrontMatter(metadata, "title");
+    const date = champFrontMatter(metadata, "date");
+    const image = champFrontMatter(metadata, "image");
+
+    if (!titre) return null;
+
+    return { titre, date, image, histoire };
+  }
+
+  function afficherArticle(article) {
+    const carte = document.createElement("article");
+    carte.className = "sauvetage-card";
+
+    const image = imagePublique(article.image);
+    const photoHTML = image
+      ? '<img src="' + echapper(image) +
+        '" alt="Photo du sauvetage : ' + echapper(article.titre) +
+        '" loading="lazy">'
+      : "";
+
+    carte.innerHTML =
+      photoHTML +
+      '<div class="sauvetage-card-content">' +
+        (article.date
+          ? '<time datetime="' + echapper(article.date) + '">' +
+            echapper(dateLisible(article.date)) + '</time>'
+          : "") +
+        '<h3>' + echapper(article.titre) + '</h3>' +
+        '<div class="sauvetage-histoire">' +
+          histoireHTML(article.histoire) +
+        '</div>' +
+      '</div>';
+
+    zoneArticles.appendChild(carte);
+  }
+
+  async function chargerSauvetages() {
+    try {
+      const url = "https://api.github.com/repos/" + depot +
+        "/contents/" + dossier + "?ref=main";
+
+      const reponse = await fetch(url);
+
+      if (!reponse.ok) {
+        throw new Error("Impossible de consulter le dossier des sauvetages.");
+      }
+
+      const fichiers = await reponse.json();
+
+      if (!Array.isArray(fichiers)) {
+        throw new Error("Le dossier des sauvetages est introuvable.");
+      }
+
+      const markdown = fichiers.filter(fichier =>
+        fichier.type === "file" && fichier.name.endsWith(".md")
+      );
+
+      const articles = await Promise.all(
+        markdown.map(async fichier => {
+          try {
+            return await lireArticle(fichier);
+          } catch (erreur) {
+            console.error(erreur);
+            return null;
+          }
+        })
+      );
+
+      const valides = articles
+        .filter(Boolean)
+        .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+      zoneArticles.replaceChildren();
+
+      if (valides.length === 0) {
+        etat.textContent = "Aucun sauvetage publié pour le moment.";
+        return;
+      }
+
+      valides.forEach(afficherArticle);
+      etat.hidden = true;
+
+    } catch (erreur) {
+      console.error(erreur);
+      etat.textContent =
+        "Les histoires ne peuvent pas être chargées pour le moment. Réessayez plus tard.";
+    }
+  }
+
+  chargerSauvetages();
+</script>
+
+</body>
+</html>
