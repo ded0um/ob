@@ -6,75 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Ô Bonheur des Nanouts | Association loi 1901</title>
-
-  <meta name="description" content="Ô Bonheur des Nanouts, association loi 1901 qui vient en aide aux chats dans le besoin et accompagne les adoptions.">
+  <meta name="description" content="Ô Bonheur des Nanouts, association loi 1901 qui vient en aide aux chats dans le besoin, accompagne les sauvetages et les adoptions.">
 
   <link rel="stylesheet" href="style.css">
 
+  <!-- Styles propres à la page d'accueil uniquement -->
   <style>
-    /* Accueil */
-    .hero {
-      padding-top: 3rem;
-      padding-bottom: 2.5rem;
-    }
-
-    .hero-logo {
-      width: min(175px, 42vw);
-      margin-bottom: .8rem;
-    }
-
     .association-label {
-      margin: -.4rem auto 0;
+      margin: 0 auto;
       color: var(--muted);
       font-size: .95rem;
-      letter-spacing: .04em;
       font-weight: 600;
+      letter-spacing: .04em;
     }
 
-    /* Boutons de don rose poudré */
+    /* Bouton de don contrasté */
     .main-nav .nav-donate {
-      background: #d8b9aa !important;
-      color: #30382f !important;
+      background: #d8b9aa;
+      color: #49372f;
+      border: 1px solid #d8b9aa;
       font-weight: 800;
-      border: 2px solid #d8b9aa;
     }
 
     .main-nav .nav-donate:hover {
-      background: #f0ddd4 !important;
-      color: #30382f !important;
+      background: #f0ddd4;
+      color: #49372f;
     }
 
     .donation-box .btn,
     .floating-donate {
-      background: #f0d7cc !important;
-      color: #49372f !important;
+      background: #f0d7cc;
+      color: #49372f;
       border: 2px solid #f0d7cc;
       font-weight: 800;
       text-decoration: none;
-      box-shadow: 0 5px 18px rgba(0, 0, 0, .16);
-      transition: background .2s ease, transform .2s ease;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, .14);
     }
 
     .donation-box .btn:hover,
     .floating-donate:hover {
-      background: #fff1e9 !important;
-      color: #49372f !important;
-      transform: translateY(-2px);
-    }
-
-    .floating-donate {
-      position: fixed !important;
-      right: 18px;
-      bottom: 18px;
-      z-index: 9999;
-      display: inline-flex !important;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 22px;
-      border-radius: 50px;
-      font-size: 15px;
-      visibility: visible !important;
-      opacity: 1 !important;
+      background: #fff1e9;
+      color: #49372f;
     }
 
     /* Contact élégant */
@@ -89,76 +61,64 @@
     .contact-link {
       display: flex;
       align-items: center;
-      gap: .85rem;
-      padding: 1.15rem;
-      background: #fffdf8;
-      border: 1px solid #e4e5dc;
+      gap: .8rem;
+      min-width: 0;
+      padding: 1.1rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
       border-radius: 18px;
-      color: #30382f;
+      color: var(--ink);
       text-decoration: none;
       box-shadow: 0 6px 20px rgba(44, 59, 41, .05);
       transition: transform .2s ease, box-shadow .2s ease;
-      min-width: 0;
     }
 
-    .contact-link:hover {
+    .contact-link:hover,
+    .contact-link:focus-visible {
       transform: translateY(-3px);
-      box-shadow: 0 12px 25px rgba(44, 59, 41, .1);
+      box-shadow: var(--shadow);
     }
 
     .contact-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 44px;
-      width: 44px;
-      height: 44px;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
       border-radius: 14px;
-      background: #e8eee4;
-      color: #42583f;
-      font-size: 1.25rem;
+      background: var(--sage-light);
+      color: var(--sage-dark);
+      font-size: 1.2rem;
       font-weight: 800;
     }
 
-    .contact-link > span:nth-child(2) {
+    .contact-text {
       display: flex;
       flex-direction: column;
       min-width: 0;
     }
 
-    .contact-link strong {
-      color: #42583f;
-      font-size: .98rem;
+    .contact-text strong {
+      color: var(--sage-dark);
+      font-size: .94rem;
     }
 
-    .contact-link small {
-      color: #687064;
-      font-size: .82rem;
+    .contact-text small {
+      color: var(--muted);
+      font-size: .78rem;
+      line-height: 1.4;
     }
 
     .contact-arrow {
       margin-left: auto;
-      color: #71866b;
-      font-size: 1.2rem;
+      color: var(--sage);
+      flex-shrink: 0;
     }
 
     @media (max-width: 750px) {
       .contact-links {
         grid-template-columns: 1fr;
         max-width: 480px;
-      }
-
-      .contact-link {
-        padding: 1rem;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .floating-donate {
-        right: 12px;
-        bottom: 12px;
-        padding: 12px 17px;
-        font-size: 14px;
       }
     }
   </style>
@@ -168,7 +128,7 @@
 
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-  <!-- EN-TÊTE -->
+  <!-- EN-TÊTE CONSERVÉ -->
   <header class="site-header">
     <div class="header-inner">
 
@@ -224,12 +184,12 @@
       <div class="container">
 
         <div class="section-head">
-          <span class="eyebrow">Qui sommes-nous ?</span>
-          <h2>Une association engagée</h2>
+          <span class="eyebrow">Notre association</span>
+          <h2>Ensemble pour les chats</h2>
           <p>
-            Ô Bonheur des Nanouts œuvre pour venir en aide aux chats
-            dans le besoin, leur apporter des soins et leur offrir
-            la possibilité de trouver une famille aimante.
+            Ô Bonheur des Nanouts vient en aide aux chats dans le besoin.
+            Chaque jour, nous faisons de notre mieux pour leur apporter
+            protection, soins et espoir d'une vie meilleure.
           </p>
         </div>
 
@@ -237,36 +197,35 @@
 
           <article class="card">
             <div class="card-icon" aria-hidden="true">🐾</div>
-            <h3>Protection animale</h3>
+            <h3>Protéger</h3>
             <p>
-              Nous agissons pour aider les chats abandonnés,
-              errants ou en situation de détresse.
+              Aider les chats abandonnés, errants ou en situation de détresse.
             </p>
           </article>
 
           <article class="card">
-            <div class="card-icon" aria-hidden="true">❤️</div>
-            <h3>Soins et bien-être</h3>
+            <div class="card-icon" aria-hidden="true">♡</div>
+            <h3>Prendre soin</h3>
             <p>
-              Nous recherchons les ressources nécessaires pour les soins
-              vétérinaires, l'alimentation et le confort de nos protégés.
+              Répondre à leurs besoins et rechercher des solutions pour
+              leurs soins vétérinaires et leur alimentation.
             </p>
           </article>
 
           <article class="card">
-            <div class="card-icon" aria-hidden="true">🏡</div>
-            <h3>Prévention</h3>
+            <div class="card-icon" aria-hidden="true">⌂</div>
+            <h3>Offrir une nouvelle vie</h3>
             <p>
-              Nous encourageons la stérilisation, l'identification
-              et les adoptions responsables.
+              Accompagner les adoptions responsables et sensibiliser
+              à la stérilisation et à l'identification.
             </p>
           </article>
 
         </div>
 
-        <div class="actions" style="margin-top: 2rem;">
+        <div class="actions" style="margin-top:2rem">
           <a class="btn btn-primary" href="sauvetages.html">
-            Découvrir nos actions
+            Découvrir nos actions →
           </a>
         </div>
 
@@ -278,52 +237,51 @@
       <div class="container">
 
         <div class="section-head">
-          <span class="eyebrow">Nos actions</span>
-          <h2>Découvrez nos chats</h2>
+          <span class="eyebrow">Leurs histoires</span>
+          <h2>Nos petits protégés</h2>
           <p>
-            Chaque chat mérite une chance. Découvrez nos actions,
-            nos protégés et les belles histoires de ceux qui ont
-            trouvé leur famille.
+            Derrière chaque sauvetage, il y a une histoire.
+            Découvrez nos actions et les nouvelles de nos chats.
           </p>
         </div>
 
         <div class="grid">
 
           <article class="card">
-            <div class="card-icon" aria-hidden="true">🐱</div>
+            <div class="card-icon" aria-hidden="true">🐈</div>
             <h3>Nos sauvetages</h3>
             <p>
-              Retrouvez les histoires de nos interventions et
-              les nouvelles de nos petits protégés.
+              Découvrez les chats que nous aidons et les actions
+              menées par l'association.
             </p>
-            <a href="sauvetages.html">Découvrir nos sauvetages →</a>
+            <a href="sauvetages.html">Découvrir les sauvetages →</a>
           </article>
 
           <article class="card">
             <div class="card-icon" aria-hidden="true">🏡</div>
-            <h3>Chats à l'adoption</h3>
+            <h3>À l'adoption</h3>
             <p>
-              Découvrez les chats qui attendent une famille
-              pour commencer une nouvelle vie.
+              Certains de nos protégés attendent encore la famille
+              qui changera leur vie.
             </p>
-            <a href="adoption.html">Voir les chats à l'adoption →</a>
+            <a href="adoption.html">Rencontrer nos chats →</a>
           </article>
 
           <article class="card">
-            <div class="card-icon" aria-hidden="true">💚</div>
-            <h3>Ils ont trouvé leur famille</h3>
+            <div class="card-icon" aria-hidden="true">♥</div>
+            <h3>Une famille pour la vie</h3>
             <p>
-              Découvrez les belles histoires de nos chats
-              qui ont trouvé leur foyer pour la vie.
+              Retrouvez les histoires de nos chats qui ont trouvé
+              leur foyer.
             </p>
-            <a href="familles.html">Lire leurs histoires →</a>
+            <a href="familles.html">Découvrir leurs histoires →</a>
           </article>
 
         </div>
 
-        <div class="actions" style="margin-top: 2rem;">
+        <div class="actions" style="margin-top:2rem">
           <a class="btn btn-secondary" href="actualites.html">
-            Nos dernières actualités
+            Toutes nos actualités
           </a>
         </div>
 
@@ -335,23 +293,21 @@
       <div class="container">
 
         <div class="donation-box">
-          <span class="eyebrow" style="color: #f0d7cc;">
-            Votre aide compte
+          <span class="eyebrow" style="color:#f0d7cc">
+            Chaque geste compte
           </span>
 
-          <h2>Aidez-nous à protéger les chats</h2>
+          <h2>Ensemble, aidons-les</h2>
 
           <p>
-            Chaque don contribue à financer les soins vétérinaires,
-            l'alimentation et les besoins de nos protégés.
-            Merci pour votre soutien et votre générosité.
+            Un don, même modeste, peut contribuer aux soins,
+            à l'alimentation et au bien-être de nos protégés.
+            Merci de faire partie de cette belle aventure.
           </p>
 
-          <div class="actions">
-            <a class="btn" href="faire-un-don.html">
-              Faire un don ♥
-            </a>
-          </div>
+          <a class="btn" href="faire-un-don.html">
+            Faire un don ♥
+          </a>
         </div>
 
       </div>
@@ -363,10 +319,10 @@
 
         <div class="section-head">
           <span class="eyebrow">Restons en contact</span>
-          <h2>Une question ? Parlons-en 🐾</h2>
+          <h2>Nous sommes à votre écoute</h2>
           <p>
-            Besoin d'un renseignement ou envie de nous aider ?
-            Retrouvez-nous ici.
+            Une question ou envie de soutenir nos actions ?
+            Retrouvez toutes les informations utiles ci-dessous.
           </p>
         </div>
 
@@ -374,9 +330,9 @@
 
           <a class="contact-link" href="mailto:obonheurdesnanouts@gmail.com">
             <span class="contact-icon" aria-hidden="true">✉</span>
-            <span>
+            <span class="contact-text">
               <strong>Nous écrire</strong>
-              <small>Par e-mail</small>
+              <small>Nous contacter par e-mail</small>
             </span>
             <span class="contact-arrow" aria-hidden="true">→</span>
           </a>
@@ -387,18 +343,18 @@
             target="_blank"
             rel="noopener noreferrer">
             <span class="contact-icon" aria-hidden="true">f</span>
-            <span>
+            <span class="contact-text">
               <strong>Nous suivre</strong>
-              <small>Sur Facebook</small>
+              <small>Retrouver l'association sur Facebook</small>
             </span>
             <span class="contact-arrow" aria-hidden="true">→</span>
           </a>
 
           <a class="contact-link" href="faq.html">
             <span class="contact-icon" aria-hidden="true">?</span>
-            <span>
-              <strong>En savoir plus</strong>
-              <small>Questions fréquentes</small>
+            <span class="contact-text">
+              <strong>Questions fréquentes</strong>
+              <small>En savoir plus sur l'association</small>
             </span>
             <span class="contact-arrow" aria-hidden="true">→</span>
           </a>
@@ -410,11 +366,13 @@
 
   </main>
 
-  <!-- PIED DE PAGE -->
+  <!-- PIED DE PAGE CONSERVÉ -->
   <footer class="site-footer">
     <div class="footer-inner">
 
-      <p><strong>Ô Bonheur des Nanouts</strong> · Association loi 1901</p>
+      <p>
+        <strong>Ô Bonheur des Nanouts</strong> · Association loi 1901
+      </p>
 
       <p>
         <a href="mailto:obonheurdesnanouts@gmail.com">
@@ -429,7 +387,7 @@
     </div>
   </footer>
 
-  <!-- BOUTON DE DON FIXE -->
+  <!-- BOUTON DE DON FIXE CONSERVÉ -->
   <a class="floating-donate" href="faire-un-don.html">
     Faire un don ♥
   </a>
