@@ -12,16 +12,15 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Zone générale */
+    /* Largeur de la zone de dons */
     .donation-page {
       width: 100%;
-      max-width: 1600px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 24px;
       box-sizing: border-box;
     }
 
-    /* Présentation des dons */
     .donation-box {
       width: 100%;
       max-width: none;
@@ -32,21 +31,17 @@
       border-radius: 18px;
     }
 
-    .donation-box h2 {
-      margin-bottom: 18px;
-    }
-
     .donation-intro {
       max-width: 900px;
-      margin: 0 auto 24px;
+      margin: 0 auto 25px;
       line-height: 1.8;
     }
 
-    /* Grand formulaire Yapla */
+    /* Formulaire Yapla : largeur de la première version */
     .yapla-frame {
       display: block;
       width: 100%;
-      max-width: 1400px;
+      max-width: 1200px;
       height: 1000px;
       margin: 30px auto 20px;
       border: 0;
@@ -55,12 +50,8 @@
     }
 
     .yapla-fallback {
-      margin: 24px auto;
+      margin: 25px auto;
       text-align: center;
-    }
-
-    .yapla-fallback p {
-      margin-bottom: 18px;
     }
 
     .donation-thanks {
@@ -80,7 +71,7 @@
       }
 
       .yapla-frame {
-        height: 1000px;
+        height: 1050px;
       }
     }
 
@@ -97,7 +88,7 @@
 
       .yapla-frame {
         width: 100%;
-        height: 1100px;
+        height: 1200px;
         margin: 20px auto;
         border-radius: 8px;
       }
@@ -181,15 +172,15 @@
 
             <p>
               Quel que soit son montant, votre don est précieux.
-              Ensemble, nous pouvons limiter la prolifération des chats
-              errants et leur offrir une vie plus digne et plus sûre.
+              Ensemble, nous pouvons offrir une vie plus digne et plus
+              sûre aux chats qui en ont besoin.
             </p>
           </div>
 
-          <!-- FORMULAIRE DE DON YAPLA -->
+          <!-- FORMULAIRE DIRECT YAPLA -->
           <iframe
             class="yapla-frame"
-            src="https://obonheurdesnanouts.s2.yapla.com/fr/campaign-7482"
+            src="https://obonheurdesnanouts.s2.yapla.com/fr/campaign-7482/donate/o-bonheur-des-nanouts/7482"
             title="Formulaire de don sécurisé - Ô Bonheur des Nanouts"
             loading="lazy">
           </iframe>
@@ -198,15 +189,15 @@
           <div class="yapla-fallback">
             <p>
               Le formulaire ne s'affiche pas correctement ?
-              Vous pouvez accéder directement à notre page de dons.
+              Vous pouvez accéder directement à la page de don sécurisée.
             </p>
 
             <a
               class="btn btn-primary"
-              href="https://obonheurdesnanouts.s2.yapla.com/fr/campaign-7482"
+              href="https://obonheurdesnanouts.s2.yapla.com/fr/campaign-7482/donate/o-bonheur-des-nanouts/7482"
               target="_blank"
               rel="noopener noreferrer">
-              ♡ Faire un don sur Yapla
+              ♡ Faire un don sécurisé
             </a>
           </div>
 
@@ -250,7 +241,7 @@
     </div>
   </footer>
 
-  <!-- BOUTON DE DON FLOTTANT -->
+  <!-- BOUTON FLOTTANT -->
   <a class="btn floating-donate"
      href="faire-un-don.html"
      aria-label="Faire un don à l'association">
