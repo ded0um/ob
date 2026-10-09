@@ -1,64 +1,132 @@
-```html
+
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Soutenez les actions de Ô Bonheur des Nanouts grâce aux dons.">
+  <meta name="description" content="Soutenez les actions de Ô Bonheur des Nanouts et aidez les chats errants grâce à vos dons.">
   <meta name="theme-color" content="#71866b">
+
   <title>Faire un don | Ô Bonheur des Nanouts</title>
+
   <link rel="stylesheet" href="style.css">
+
   <style>
+    /* Zone générale */
+    .donation-page {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 24px;
+      box-sizing: border-box;
+    }
+
+    /* Présentation des dons */
+    .donation-box {
+      width: 100%;
+      max-width: none;
+      margin: 0 auto;
+      padding: 30px;
+      box-sizing: border-box;
+      text-align: center;
+      border-radius: 18px;
+    }
+
+    .donation-box h2 {
+      margin-bottom: 18px;
+    }
+
+    .donation-intro {
+      max-width: 900px;
+      margin: 0 auto 24px;
+      line-height: 1.8;
+    }
+
+    /* Grand formulaire Yapla */
     .yapla-frame {
       display: block;
       width: 100%;
-      max-width: 950px;
-      height: 750px;
-      margin: 2rem auto 1rem;
+      max-width: 1400px;
+      height: 1000px;
+      margin: 30px auto 20px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 14px;
       background: #fff;
     }
 
-    .donation-box {
-      text-align: center;
-    }
-
-    .donation-box > p {
-      max-width: 760px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
     .yapla-fallback {
-      margin-top: 1rem;
+      margin: 24px auto;
       text-align: center;
     }
 
-    @media (max-width: 600px) {
+    .yapla-fallback p {
+      margin-bottom: 18px;
+    }
+
+    .donation-thanks {
+      max-width: 900px;
+      margin: 30px auto 0;
+      line-height: 1.8;
+    }
+
+    /* Tablettes */
+    @media (max-width: 900px) {
+      .donation-page {
+        padding: 0 16px;
+      }
+
+      .donation-box {
+        padding: 22px 16px;
+      }
+
       .yapla-frame {
-        height: 900px;
+        height: 1000px;
+      }
+    }
+
+    /* Téléphones */
+    @media (max-width: 600px) {
+      .donation-page {
+        padding: 0 8px;
+      }
+
+      .donation-box {
+        padding: 20px 10px;
+        border-radius: 12px;
+      }
+
+      .yapla-frame {
+        width: 100%;
+        height: 1100px;
+        margin: 20px auto;
+        border-radius: 8px;
       }
     }
   </style>
 </head>
 
 <body>
+
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
+  <!-- EN-TÊTE ET MENU -->
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Ô Bonheur des Nanouts, accueil">
+
+      <a class="brand" href="index.html"
+         aria-label="Ô Bonheur des Nanouts, accueil">
         <img src="images/logo.png" alt="Logo Ô Bonheur des Nanouts">
         <span>Ô Bonheur<br>des Nanouts</span>
       </a>
 
       <button class="nav-toggle" type="button"
-        aria-expanded="false" aria-controls="menu-principal">
+              aria-expanded="false"
+              aria-controls="menu-principal">
         ☰ Menu
       </button>
 
-      <nav class="main-nav" id="menu-principal" aria-label="Navigation principale">
+      <nav class="main-nav" id="menu-principal"
+           aria-label="Navigation principale">
         <a href="index.html">Accueil</a>
         <a href="index.html#association">L'association</a>
         <a href="sauvetages.html">Nos sauvetages</a>
@@ -69,51 +137,70 @@
         <a href="faq.html">FAQ</a>
         <a class="nav-donate" href="faire-un-don.html">♡ Faire un don</a>
       </nav>
+
     </div>
   </header>
 
+  <!-- CONTENU PRINCIPAL -->
   <main id="contenu">
+
     <section class="page-hero">
       <div class="container">
         <div class="eyebrow">Votre générosité change des vies</div>
-        <h1>Faire un don</h1>
+        <h1>Faire un don 🐾</h1>
         <p class="lead">
-          Chaque contribution peut aider un chat à recevoir les soins
-          et l'attention dont il a besoin.
+          Chaque patte mérite une chance !
+          Grâce à vous, nous pouvons continuer à aider les chats errants.
         </p>
       </div>
     </section>
 
     <section class="section">
-      <div class="container content">
+      <div class="donation-page">
 
         <div class="donation-box">
-          <h2>Merci du fond du cœur 💚</h2>
 
-          <p>
-            Vos dons contribuent aux soins vétérinaires, à la stérilisation,
-            à l'identification, à la nourriture et à la litière des chats
-            aidés par notre association.
-          </p>
+          <h2>💚 Aidez les chats errants</h2>
 
-          <p>
-            Chaque geste compte et nous aide à poursuivre nos actions
-            dans la Somme. Grâce à vous, nous pouvons continuer à venir
-            en aide aux chats qui en ont besoin.
-          </p>
+          <div class="donation-intro">
+            <p>
+              L'association Ô Bonheur des Nanouts vient en aide aux chats
+              errants afin de leur offrir une vie meilleure.
+              Votre générosité nous permet de poursuivre nos actions
+              et de protéger ces petits oubliés.
+            </p>
 
+            <h3>À quoi servent vos dons ?</h3>
+
+            <p>
+              Vos dons contribuent aux soins vétérinaires, à la
+              stérilisation, à la vaccination, à l'identification,
+              à la nourriture et à la litière.
+              Chaque euro compte !
+            </p>
+
+            <p>
+              Quel que soit son montant, votre don est précieux.
+              Ensemble, nous pouvons limiter la prolifération des chats
+              errants et leur offrir une vie plus digne et plus sûre.
+            </p>
+          </div>
+
+          <!-- FORMULAIRE DE DON YAPLA -->
           <iframe
             class="yapla-frame"
             src="https://obonheurdesnanouts.s2.yapla.com/fr/campaign-7482"
-            title="Formulaire de don pour Ô Bonheur des Nanouts"
+            title="Formulaire de don sécurisé - Ô Bonheur des Nanouts"
             loading="lazy">
           </iframe>
 
+          <!-- LIEN DE SECOURS -->
           <div class="yapla-fallback">
             <p>
               Le formulaire ne s'affiche pas correctement ?
               Vous pouvez accéder directement à notre page de dons.
             </p>
+
             <a
               class="btn btn-primary"
               href="https://obonheurdesnanouts.s2.yapla.com/fr/campaign-7482"
@@ -123,41 +210,71 @@
             </a>
           </div>
 
-          <p style="margin-top:2rem">
-            <strong>Un immense merci pour votre générosité et votre soutien.</strong><br>
-            Ensemble, offrons une seconde chance aux chats oubliés. 🐾
-          </p>
-        </div>
+          <div class="donation-thanks">
+            <h3>🙏 Merci du fond du cœur</h3>
 
+            <p>
+              Merci pour votre générosité, votre confiance et votre soutien.
+              Grâce à vous, nous pouvons continuer à prendre soin des chats
+              qui en ont le plus besoin.
+            </p>
+
+            <p>
+              <strong>
+                Ensemble, offrons une seconde chance aux chats oubliés. 🐾
+              </strong>
+            </p>
+          </div>
+
+        </div>
       </div>
     </section>
+
   </main>
 
+  <!-- PIED DE PAGE -->
   <footer class="site-footer">
     <div class="footer-inner">
+
       <strong>Ô Bonheur des Nanouts</strong> ·
       <a href="mailto:obonheurdesnanouts@gmail.com">
         obonheurdesnanouts@gmail.com
       </a>
+
       <br>
-      <span>© <span id="year">2026</span> Ô Bonheur des Nanouts</span>
+
+      <span>
+        © <span id="year">2026</span> Ô Bonheur des Nanouts
+      </span>
+
     </div>
   </footer>
 
-  <a class="btn floating-donate" href="faire-un-don.html"
-    aria-label="Faire un don à l'association">
+  <!-- BOUTON DE DON FLOTTANT -->
+  <a class="btn floating-donate"
+     href="faire-un-don.html"
+     aria-label="Faire un don à l'association">
     ♡ Faire un don
   </a>
 
-  <div class="photo-modal" aria-hidden="true" role="dialog" aria-label="Photo agrandie">
+  <!-- FENÊTRE PHOTO DU SITE -->
+  <div class="photo-modal"
+       aria-hidden="true"
+       role="dialog"
+       aria-label="Photo agrandie">
+
     <button type="button" aria-label="Fermer la photo">×</button>
     <img src="" alt="">
+
   </div>
 
+  <!-- SCRIPTS -->
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('year').textContent =
+      new Date().getFullYear();
   </script>
+
   <script src="script.js"></script>
+
 </body>
 </html>
-```
