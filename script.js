@@ -1,9 +1,131 @@
-document.addEventListener('DOMContentLoaded',()=>{
- const toggle=document.querySelector('.nav-toggle'),nav=document.querySelector('.main-nav');
- if(toggle&&nav){toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}));}
- const revealEls=document.querySelectorAll('.reveal');
- if('IntersectionObserver' in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.08});revealEls.forEach(el=>io.observe(el));}else revealEls.forEach(el=>el.classList.add('visible'));
- const modal=document.querySelector('.photo-modal');
- if(modal){const modalImg=modal.querySelector('img');document.querySelectorAll('[data-enlarge]').forEach(img=>{img.addEventListener('click',()=>{modalImg.src=img.src;modalImg.alt=img.alt;modal.classList.add('open');modal.setAttribute('aria-hidden','false')})});const close=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');modalImg.src=''};modal.querySelector('button').addEventListener('click',close);modal.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});}
- document.querySelectorAll('[data-share-facebook]').forEach(btn=>btn.addEventListener('click',()=>{const url=encodeURIComponent(window.location.href);window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'_blank','noopener,noreferrer,width=650,height=500')}));
+
+document.addEventListener('DOMContentLoaded', () => {
+  // MENU DE NAVIGATION
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.main-nav');
+
+  if (toggle && nav) {
+    const fermerMenu = () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Ouvrir le menu');
+    };
+
+    toggle.addEventListener('click', () => {
+      const ouvert = nav.classList.toggle('open');
+
+      toggle.setAttribute('aria-expanded', String(ouvert));
+      toggle.setAttribute(
+        'aria-label',
+        ouvert ? 'Fermer le menu' : 'Ouvrir le menu'
+      );
+    });
+
+    nav.querySelectorAll('a').forEach(lien => {
+      lien.addEventListener('click', fermerMenu);
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        fermerMenu();
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', event => {
+      if (
+        nav.classList.contains('open') &&
+        !nav.contains(event.target) &&
+        !toggle.contains(event.target)
+      ) {
+        fermerMenu();
+      }
+    });
+  }
+
+  // ANIMATIONS AU DÉFILEMENT
+  const elementsReveal = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    elementsReveal.forEach(element => observer.observe(element));
+  } else {
+    elementsReveal.forEach(element => {
+      element.classList.add('visible');
+    });
+  }
+
+  // AGRANDISSEMENT DES PHOTOS
+  const modal = document.querySelector('.photo-modal');
+
+  if (modal) {
+    const modalImg = modal.querySelector('img');
+    const closeButton = modal.querySelector('button');
+
+    if (modalImg && closeButton) {
+      const ouvrirPhoto = image => {
+        modalImg.src = image.currentSrc || image.src;
+        modalImg.alt = image.alt || 'Photo agrandie';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeButton.focus();
+      };
+
+      const fermerPhoto = () => {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.removeAttribute('src');
+        document.body.style.overflow = '';
+      };
+
+      document.querySelectorAll('[data-enlarge]').forEach(image => {
+        image.addEventListener('click', () => ouvrirPhoto(image));
+      });
+
+      closeButton.addEventListener('click', fermerPhoto);
+
+      modal.addEventListener('click', event => {
+        if (event.target === modal) {
+          fermerPhoto();
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modal.classList.contains('open')) {
+          fermerPhoto();
+        }
+      });
+    }
+  }
+
+  // PARTAGE FACEBOOK
+  document.querySelectorAll('[data-share-facebook]').forEach(bouton => {
+    bouton.addEventListener('click', () => {
+      const url = encodeURIComponent(window.location.href);
+
+      window.open(
+        'https://www.facebook.com/sharer/sharer.php?u=' + url,
+        '_blank',
+        'noopener,noreferrer,width=650,height=500'
+      );
+    });
+  });
+
+  // ANNÉE AUTOMATIQUE DANS LES PIEDS DE PAGE
+  ['year', 'annee', 'current-year'].forEach(id => {
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.textContent = new Date().getFullYear();
+    }
+  });
 });
