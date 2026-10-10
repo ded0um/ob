@@ -5,3 +5,18 @@ main{min-height:60vh}.container{width:min(1100px,calc(100% - 2.4rem));margin-inl
 @media(max-width:1050px){.header-inner{flex-wrap:wrap}.nav-toggle{display:block;margin-left:auto}.main-nav{display:none;width:100%;flex-direction:column;align-items:stretch;padding:.4rem 0 .6rem}.main-nav.open{display:flex}.main-nav a{padding:.75rem 1rem}.brand span{max-width:220px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.container{width:min(100% - 1.3rem,1100px)}.hero{padding:3rem .7rem 2.6rem}.section{padding:3rem 0}.grid,.cat-grid,.split{grid-template-columns:1fr}.partner-grid{grid-template-columns:repeat(2,1fr)}.story{grid-template-columns:1fr}.story .cat-photo{max-width:100%;aspect-ratio:16/9}.brand img{width:48px;height:48px}.brand span{font-size:.85rem;max-width:170px}.floating-donate{right:.65rem;bottom:.65rem;padding:.72rem 1rem}.donation-box{padding:1.6rem 1rem}.section-head{text-align:left}.section-head.center{text-align:center}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{transition:none!important}}
+
+
+/* Mise en évidence de la page actuellement ouverte */
+.main-nav a[aria-current="page"] {
+  background-color: #e3ecdf;
+  color: #40583d;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+/* Effet au survol, sans masquer la page active */
+.main-nav a[aria-current="page"]:hover {
+  background-color: #d5e3cf;
+  color: #30472e;
+}
