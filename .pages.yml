@@ -1,7 +1,16 @@
 
 media:
-  input: images
-  output: /images
+  - name: chats
+    label: Photos des chats
+    input: images/chats
+    output: /images/chats
+    categories: [image]
+
+  - name: sauvetages
+    label: Photos des sauvetages
+    input: images/sauvetages
+    output: /images/sauvetages
+    categories: [image]
 
 content:
   # NOS SAUVETAGES
