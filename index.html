@@ -568,36 +568,7 @@
   <!-- SCRIPTS EXISTANTS -->
   <script src="script.js"></script>
 
-  <script>
-    const annee = document.getElementById("annee");
-
-    if (annee) {
-      annee.textContent = new Date().getFullYear();
-    }
-
-    const menuToggle = document.querySelector(".nav-toggle");
-    const menu = document.querySelector(".main-nav");
-
-    if (menuToggle && menu) {
-      menuToggle.addEventListener("click", function () {
-        const ouvert = menu.classList.toggle("open");
-
-        menuToggle.setAttribute("aria-expanded", String(ouvert));
-        menuToggle.setAttribute(
-          "aria-label",
-          ouvert ? "Fermer le menu" : "Ouvrir le menu"
-        );
-      });
-
-      menu.querySelectorAll("a").forEach(function (lien) {
-        lien.addEventListener("click", function () {
-          menu.classList.remove("open");
-          menuToggle.setAttribute("aria-expanded", "false");
-          menuToggle.setAttribute("aria-label", "Ouvrir le menu");
-        });
-      });
-    }
-  </script>
+ 
 
 </body>
 </html>
