@@ -316,11 +316,15 @@ function afficherChat(chat) {
   let html = "";
   const photo = cheminImage(chat.image);
 
+
   if (photo) {
-    html += '<img src="' + echapper(photo) +
+    html += '<img data-enlarge src="' + echapper(photo) +
       '" alt="Photo de ' + echapper(chat.titre) +
-      '" loading="lazy">';
+      '" loading="lazy" tabindex="0" role="button" ' +
+      'aria-label="Agrandir la photo de ' +
+      echapper(chat.titre) + '">';
   }
+
 
   html += '<div class="chat-card-content">';
   html += '<h2>' + echapper(chat.titre) + '</h2>';
