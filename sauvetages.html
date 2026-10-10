@@ -301,6 +301,7 @@ async function lireArticle(fichier) {
   };
 }
 
+
 function afficherArticle(article) {
   const carte = document.createElement("article");
   carte.className = "sauvetage-card";
@@ -309,9 +310,11 @@ function afficherArticle(article) {
 
   carte.innerHTML =
     (photo
-      ? '<img src="' + echapper(photo) +
+      ? '<img data-enlarge src="' + echapper(photo) +
         '" alt="Photo de ' + echapper(article.titre) +
-        '" loading="lazy">'
+        '" loading="lazy" tabindex="0" role="button" ' +
+        'aria-label="Agrandir la photo de ' +
+        echapper(article.titre) + '">'
       : "") +
 
     '<div class="sauvetage-card-content">' +
@@ -332,6 +335,7 @@ function afficherArticle(article) {
 
   zoneArticles.appendChild(carte);
 }
+
 
 async function chargerSauvetages() {
   try {
