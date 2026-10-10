@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  
   // AGRANDISSEMENT DES PHOTOS
   const modal = document.querySelector('.photo-modal');
 
@@ -87,8 +88,31 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
       };
 
-      document.querySelectorAll('[data-enlarge]').forEach(image => {
-        image.addEventListener('click', () => ouvrirPhoto(image));
+      // Écoute aussi les photos ajoutées après le chargement
+      document.addEventListener('click', event => {
+        const image = event.target.closest('img[data-enlarge]');
+
+        if (image) {
+          ouvrirPhoto(image);
+        }
+      });
+
+      // Permet d'ouvrir une photo au clavier
+      document.addEventListener('keydown', event => {
+        const image = event.target.closest?.('img[data-enlarge]');
+
+        if (
+          image &&
+          (event.key === 'Enter' || event.key === ' ')
+        ) {
+          event.preventDefault();
+          ouvrirPhoto(image);
+          return;
+        }
+
+        if (event.key === 'Escape' && modal.classList.contains('open')) {
+          fermerPhoto();
+        }
       });
 
       closeButton.addEventListener('click', fermerPhoto);
@@ -98,14 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
           fermerPhoto();
         }
       });
-
-      document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && modal.classList.contains('open')) {
-          fermerPhoto();
-        }
-      });
     }
   }
+
 
   // PARTAGE FACEBOOK
   document.querySelectorAll('[data-share-facebook]').forEach(bouton => {
