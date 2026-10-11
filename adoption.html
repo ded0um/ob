@@ -193,10 +193,10 @@
 
 /* Tablettes et téléphones */
 @media (max-width: 700px) {
-
-  /* Aimantation douce des fiches au défilement */
+  /* Aimantation douce : privilégier le haut des fiches */
   html {
     scroll-snap-type: y proximity;
+    scroll-padding-top: 15px;
   }
 
   #liste-chats {
@@ -206,7 +206,8 @@
 
   .chat-card {
     scroll-snap-align: start;
-    scroll-margin-top: 85px;
+    scroll-snap-stop: normal;
+    scroll-margin-top: 15px;
   }
 
   /* On conserve la hauteur actuelle des photos */
