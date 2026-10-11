@@ -26,7 +26,6 @@
   box-shadow: 0 4px 15px #0002;
 }
 
-/* Photos */
 .chat-card > img {
   display: block;
   width: 100%;
@@ -46,7 +45,6 @@
   margin: 0 0 15px;
 }
 
-/* Toutes les informations les unes sous les autres */
 .chat-infos {
   display: flex;
   flex-direction: column;
@@ -55,7 +53,6 @@
   margin: 15px 0 20px;
 }
 
-/* Encadrés uniformes */
 .chat-badge,
 .chat-description {
   display: block;
@@ -116,7 +113,43 @@
   margin: 25px 0;
 }
 
-/* Téléphones */
+.filtres-chats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: end;
+  margin: 25px 0;
+  padding: 16px;
+  border: 1px solid #dce6d7;
+  border-radius: 12px;
+  background: #f7f9f5;
+}
+
+.filtres-chats label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 180px;
+  font-weight: 600;
+  color: #425640;
+}
+
+.filtres-chats select {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 10px;
+  border: 1px solid #cbd8c5;
+  border-radius: 8px;
+  background: #fff;
+  color: #263326;
+  font: inherit;
+}
+
+#resultats-filtres {
+  margin: 8px 0 0;
+  color: #52664e;
+}
+
 @media (max-width: 700px) {
   #liste-chats {
     grid-template-columns: 1fr;
@@ -178,10 +211,41 @@
         Découvrez nos protégés et contactez-nous pour en savoir plus sur une adoption.
       </p>
 
+      <div class="filtres-chats" aria-label="Trier et filtrer les chats">
+        <label for="tri-chats">Trier par
+          <select id="tri-chats">
+            <option value="date">Plus récemment publiés</option>
+            <option value="nom">Nom (A à Z)</option>
+            <option value="age-jeune">Âge : du plus jeune au plus âgé</option>
+            <option value="age-vieux">Âge : du plus âgé au plus jeune</option>
+          </select>
+        </label>
+
+        <label for="filtre-sexe">Sexe
+          <select id="filtre-sexe">
+            <option value="tous">Tous les chats</option>
+            <option value="femelle">Femelles</option>
+            <option value="male">Mâles</option>
+            <option value="inconnu">Sexe inconnu</option>
+          </select>
+        </label>
+
+        <label for="filtre-age">Âge
+          <select id="filtre-age">
+            <option value="tous">Tous les âges</option>
+            <option value="moins6">Moins de 6 mois</option>
+            <option value="6a12">De 6 à 12 mois</option>
+            <option value="plus12">Plus d'un an</option>
+            <option value="nonprecise">Âge non précisé</option>
+          </select>
+        </label>
+      </div>
+
       <p id="etat-chats" role="status" aria-live="polite">
         Chargement des chats à l'adoption…
       </p>
 
+      <p id="resultats-filtres" aria-live="polite" hidden></p>
       <div id="liste-chats"></div>
 
       <div class="paw-divider" aria-hidden="true">🐾　·　🐾　·　🐾</div>
@@ -230,6 +294,12 @@ const cheminSite = "/ob";
 
 const zone = document.getElementById("liste-chats");
 const etat = document.getElementById("etat-chats");
+const triChats = document.getElementById("tri-chats");
+const filtreSexe = document.getElementById("filtre-sexe");
+const filtreAge = document.getElementById("filtre-age");
+const resultatsFiltres = document.getElementById("resultats-filtres");
+
+let tousLesChats = [];
 
 function echapper(t) {
   return String(t ?? "").replace(/[&<>"']/g, c => ({
@@ -298,7 +368,6 @@ function dateFr(d) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(d || "")) return d || "";
 
   const [a, m, j] = d.split("-").map(Number);
-
   return new Date(a, m - 1, j).toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",
@@ -306,8 +375,104 @@ function dateFr(d) {
   });
 }
 
-/* Chaque ligne d'une description devient un élément de liste.
-   Les textes simples restent dans une liste à puces également. */
+// Convertit l'âge saisi en nombre de mois.
+function ageEnMois(age) {
+  const texte = String(age || "")
+    .toLocaleLowerCase("fr")
+    .replace(/,/g, ".");
+
+  if (!texte.trim()) return null;
+
+  let mois = 0;
+  let trouve = false;
+
+  const ans = texte.match(/(\d+(?:\.\d+)?)\s*(?:an|ans|année|années)\b/);
+  const m = texte.match(/(\d+(?:\.\d+)?)\s*(?:mois|moi)\b/);
+  const semaines = texte.match(/(\d+(?:\.\d+)?)\s*(?:semaine|semaines)\b/);
+  const jours = texte.match(/(\d+(?:\.\d+)?)\s*(?:jour|jours)\b/);
+
+  if (ans) {
+    mois += Number(ans[1]) * 12;
+    trouve = true;
+  }
+
+  if (m) {
+    mois += Number(m[1]);
+    trouve = true;
+  }
+
+  if (semaines) {
+    mois += Number(semaines[1]) / 4.345;
+    trouve = true;
+  }
+
+  if (jours) {
+    mois += Number(jours[1]) / 30.437;
+    trouve = true;
+  }
+
+  // Si seul un nombre est saisi, il est interprété comme un nombre de mois.
+  if (!trouve && /^\d+(?:\.\d+)?$/.test(texte.trim())) {
+    mois = Number(texte.trim());
+    trouve = true;
+  }
+
+  return trouve ? Math.max(0, Math.floor(mois)) : null;
+}
+
+function moisEcoules(dateReference) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateReference || "")) return 0;
+
+  const [an, mois, jour] = dateReference.split("-").map(Number);
+  const maintenant = new Date();
+
+  let ecoules =
+    (maintenant.getFullYear() - an) * 12 +
+    (maintenant.getMonth() + 1 - mois);
+
+  if (maintenant.getDate() < jour) ecoules--;
+
+  return Math.max(0, ecoules);
+}
+
+function ageActuel(chat) {
+  const base = ageEnMois(chat.age);
+
+  if (base === null) {
+    return { texte: chat.age || "", mois: null };
+  }
+
+  // Pour les anciennes fiches sans date_age, la date de publication sert de référence.
+  const reference = chat.dateAge || chat.date;
+  const total = base + moisEcoules(reference);
+
+  const ans = Math.floor(total / 12);
+  const mois = total % 12;
+
+  let texte = "";
+
+  if (ans) {
+    texte = ans + (ans > 1 ? " ans" : " an");
+  }
+
+  if (mois) {
+    texte += (texte ? " et " : "") + mois + " mois";
+  }
+
+  if (!texte) texte = "Moins d'un mois";
+
+  return { texte, mois: total };
+}
+
+function sexeNormalise(sexe) {
+  const s = statutNormalise(sexe);
+
+  if (s === "femelle") return "femelle";
+  if (s === "male") return "male";
+
+  return "inconnu";
+}
+
 function paragraphes(t) {
   const texte = String(t || "").trim();
   if (!texte) return "";
@@ -329,7 +494,10 @@ function paragraphes(t) {
 
 async function lireChat(f) {
   const r = await fetch(f.download_url);
-  if (!r.ok) throw Error("Lecture impossible : " + f.name);
+
+  if (!r.ok) {
+    throw Error("Lecture impossible : " + f.name);
+  }
 
   const o = lireFicheMarkdown(await r.text());
   if (!o) return null;
@@ -340,6 +508,7 @@ async function lireChat(f) {
     image: o.image || "",
     statut: o.statut || "",
     age: o.age || "",
+    dateAge: o.date_age || "",
     sexe: o.sexe || "",
     caractere: o.caractere || "",
     conditions: o.conditions || "",
@@ -364,13 +533,13 @@ function afficherChat(chat) {
 
   html += '<div class="chat-card-content">';
   html += '<h2>' + echapper(chat.titre) + '</h2>';
-
-  /* Âge, sexe et date : chacun dans son propre encadré */
   html += '<div class="chat-infos">';
 
-  if (chat.age) {
+  const age = ageActuel(chat);
+
+  if (age.texte) {
     html += '<div class="chat-badge">🐱 Âge : ' +
-      echapper(chat.age) + '</div>';
+      echapper(age.texte) + '</div>';
   }
 
   if (chat.sexe) {
@@ -385,7 +554,6 @@ function afficherChat(chat) {
 
   html += '</div>';
 
-  /* Caractère */
   if (chat.caractere) {
     html += '<section class="chat-description">' +
       '<h3>Caractère</h3>' +
@@ -393,7 +561,6 @@ function afficherChat(chat) {
       '</section>';
   }
 
-  /* Conditions d'adoption */
   if (chat.conditions) {
     html += '<section class="chat-description">' +
       '<h3>Conditions d’adoption</h3>' +
@@ -401,7 +568,6 @@ function afficherChat(chat) {
       '</section>';
   }
 
-  /* Histoire */
   if (chat.histoire) {
     html += '<section class="chat-description">' +
       '<h3>Son histoire</h3>' +
@@ -409,7 +575,6 @@ function afficherChat(chat) {
       '</section>';
   }
 
-  /* Informations complémentaires, sans titre */
   if (chat.body) {
     html += '<section class="chat-description">' +
       paragraphes(chat.body) +
@@ -427,6 +592,98 @@ function afficherChat(chat) {
   zone.appendChild(carte);
 }
 
+function afficherListeFiltree() {
+  const sexeChoisi = filtreSexe.value;
+  const ageChoisi = filtreAge.value;
+
+  let chats = tousLesChats.filter(chat => {
+    if (
+      sexeChoisi !== "tous" &&
+      sexeNormalise(chat.sexe) !== sexeChoisi
+    ) {
+      return false;
+    }
+
+    const age = ageActuel(chat);
+
+    if (ageChoisi === "nonprecise") {
+      return age.mois === null;
+    }
+
+    if (ageChoisi === "moins6" &&
+        !(age.mois !== null && age.mois < 6)) {
+      return false;
+    }
+
+    if (ageChoisi === "6a12" &&
+        !(age.mois !== null && age.mois >= 6 && age.mois <= 12)) {
+      return false;
+    }
+
+    if (ageChoisi === "plus12" &&
+        !(age.mois !== null && age.mois > 12)) {
+      return false;
+    }
+
+    if (
+      ageChoisi !== "tous" &&
+      ageChoisi !== "nonprecise" &&
+      age.mois === null
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
+  const modeTri = triChats.value;
+
+  chats.sort((a, b) => {
+    if (modeTri === "nom") {
+      return a.titre.localeCompare(
+        b.titre, "fr", { sensitivity: "base" }
+      );
+    }
+
+    if (modeTri === "age-jeune" || modeTri === "age-vieux") {
+      const aa = ageActuel(a).mois;
+      const bb = ageActuel(b).mois;
+
+      if (aa === null && bb === null) {
+        return a.titre.localeCompare(b.titre, "fr");
+      }
+
+      if (aa === null) return 1;
+      if (bb === null) return -1;
+
+      return modeTri === "age-jeune" ? aa - bb : bb - aa;
+    }
+
+    return (b.date || "").localeCompare(a.date || "");
+  });
+
+  zone.replaceChildren();
+
+  if (!chats.length) {
+    resultatsFiltres.hidden = false;
+    resultatsFiltres.textContent =
+      "Aucun chat ne correspond à ces filtres.";
+    return;
+  }
+
+  resultatsFiltres.hidden = false;
+  resultatsFiltres.textContent =
+    chats.length + (chats.length > 1 ? " chats affichés" : " chat affiché");
+
+  chats.forEach(afficherChat);
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    zone.querySelectorAll(".chat-card").forEach(carte => {
+      carte.classList.add("visible");
+    });
+  }));
+}
+
 async function chargerChats() {
   try {
     const r = await fetch(
@@ -435,8 +692,10 @@ async function chargerChats() {
     );
 
     if (!r.ok) {
-      throw Error("Erreur GitHub HTTP " + r.status +
-        ". Vérifie que le dossier _chats existe.");
+      throw Error(
+        "Erreur GitHub HTTP " + r.status +
+        ". Vérifie que le dossier _chats existe."
+      );
     }
 
     const fichiers = await r.json();
@@ -456,33 +715,29 @@ async function chargerChats() {
       }))
     );
 
-    const chats = resultats
-      .filter(c => c && c.titre &&
-        statutNormalise(c.statut) === "a l'adoption")
-      .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    tousLesChats = resultats.filter(c =>
+      c && c.titre &&
+      statutNormalise(c.statut) === "a l'adoption"
+    );
 
-    zone.replaceChildren();
-
-    if (!chats.length) {
+    if (!tousLesChats.length) {
       etat.textContent =
         "Aucun chat n'est actuellement présenté à l'adoption. Revenez bientôt !";
       return;
     }
 
-    chats.forEach(afficherChat);
     etat.hidden = true;
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        zone.querySelectorAll(".chat-card").forEach(carte => {
-          carte.classList.add("visible");
-        });
-      });
+    [triChats, filtreSexe, filtreAge].forEach(el => {
+      el.addEventListener("change", afficherListeFiltree);
     });
+
+    afficherListeFiltree();
 
   } catch (e) {
     console.error(e);
-    etat.textContent = "Impossible de charger les chats. " + e.message;
+    etat.textContent =
+      "Impossible de charger les chats. " + e.message;
   }
 }
 
