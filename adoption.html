@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -37,14 +36,14 @@
 <main id="contenu">
 <section class="page-hero"><div class="container"><div class="eyebrow">Une famille pour la vie</div><h1>Chats à l'adoption</h1><p class="lead">Ils attendent une famille aimante qui leur offrira sécurité, douceur et une nouvelle chance.</p></div></section>
 <section class="section"><div class="container content">
-<h2>Nos petits protégés cherchent une famille</h2>
-<p>Découvrez nos protégés et contactez-nous pour en savoir plus sur une adoption.</p>
+<h2 class="reveal">Nos petits protégés cherchent une famille</h2>
+<p class="reveal">Découvrez nos protégés et contactez-nous pour en savoir plus sur une adoption.</p>
 <p id="etat-chats" role="status" aria-live="polite">Chargement des chats à l'adoption…</p>
 <div id="liste-chats"></div>
 <div class="paw-divider" aria-hidden="true">🐾　·　🐾　·　🐾</div>
-<h2>Vous souhaitez adopter ?</h2>
-<p>L'adoption est un engagement important. Contactez l'association pour connaître les modalités.</p>
-<div class="actions"><a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject=Demande%20d'adoption">Nous contacter</a><a class="btn btn-secondary" href="faire-un-don.html">Soutenir l'association</a></div>
+<h2 class="reveal">Vous souhaitez adopter ?</h2>
+<p class="reveal">L'adoption est un engagement important. Contactez l'association pour connaître les modalités.</p>
+<div class="actions reveal"><a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject=Demande%20d'adoption">Nous contacter</a><a class="btn btn-secondary" href="faire-un-don.html">Soutenir l'association</a></div>
 </div></section></main>
 <footer class="site-footer"><div class="footer-inner"><strong>Ô Bonheur des Nanouts</strong> · <a href="mailto:obonheurdesnanouts@gmail.com">obonheurdesnanouts@gmail.com</a><br><span>© <span id="year">2026</span> Ô Bonheur des Nanouts</span></div></footer>
 <a class="btn floating-donate" href="faire-un-don.html" aria-label="Faire un don">♡ Faire un don</a>
@@ -113,7 +112,7 @@ async function lireChat(f){
 }
 function afficherChat(chat){
  const carte=document.createElement("article");
- carte.className="chat-card";
+ carte.className="chat-card reveal";
  let html="";
  const photo=cheminImage(chat.image);
 
@@ -146,6 +145,18 @@ async function chargerChats(){
   if(!chats.length){etat.textContent="Aucun chat n'est actuellement présenté à l'adoption. Revenez bientôt !";return;}
   chats.forEach(afficherChat);
   etat.hidden=true;
+
+  // Les cartes sont ajoutées dynamiquement, potentiellement après
+  // l'initialisation de l'observateur de reveal dans script.js.
+  // On déclenche donc l'apparition ici, avec la cascade du CSS.
+  requestAnimationFrame(()=>{
+   requestAnimationFrame(()=>{
+    zone.querySelectorAll(".chat-card").forEach(carte=>{
+     carte.classList.add("visible");
+    });
+   });
+  });
+
  }catch(e){console.error(e);etat.textContent="Impossible de charger les chats. "+e.message;}
 }
 chargerChats();
