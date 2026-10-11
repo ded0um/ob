@@ -20,3 +20,15 @@ main{min-height:60vh}.container{width:min(1100px,calc(100% - 2.4rem));margin-inl
   background-color: #d5e3cf;
   color: #30472e;
 }
+
+
+/* Révélation en cascade : les éléments suivis dans une grille
+   apparaissent légèrement décalés (2e, 3e, 4e...) */
+.reveal:nth-child(2)  { transition-delay: .08s; }
+.reveal:nth-child(3)  { transition-delay: .16s; }
+.reveal:nth-child(4)  { transition-delay: .24s; }
+
+/* Sur mobile, les animations partent vite : pas de décalage */
+@media (max-width: 700px) {
+  .reveal { transition-delay: 0s !important; }
+}
