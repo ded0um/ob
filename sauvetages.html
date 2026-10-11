@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -170,13 +169,13 @@
         🐾　·　🐾　·　🐾
       </div>
 
-      <h2>Un soutien précieux</h2>
-      <p>
+      <h2 class="reveal">Un soutien précieux</h2>
+      <p class="reveal">
         Chaque geste aide l'association à poursuivre ses actions :
         don financier, nourriture, litière, matériel ou partage de nos actualités.
       </p>
 
-      <div class="actions">
+      <div class="actions reveal">
         <a class="btn btn-primary" href="faire-un-don.html">Soutenir les chats</a>
         <a class="btn btn-secondary" href="actualites.html">Voir nos actualités</a>
       </div>
@@ -304,7 +303,7 @@ async function lireArticle(fichier) {
 
 function afficherArticle(article) {
   const carte = document.createElement("article");
-  carte.className = "sauvetage-card";
+  carte.className = "sauvetage-card reveal";
 
   const photo = cheminImage(article.image);
 
@@ -391,6 +390,17 @@ async function chargerSauvetages() {
 
     valides.forEach(afficherArticle);
     etat.hidden = true;
+
+    // Les cartes sont ajoutées dynamiquement, potentiellement après
+    // l'initialisation de l'observateur de reveal dans script.js.
+    // On déclenche donc l'apparition ici, avec la cascade du CSS.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        zoneArticles.querySelectorAll(".sauvetage-card").forEach(carte => {
+          carte.classList.add("visible");
+        });
+      });
+    });
 
   } catch (erreur) {
     console.error(erreur);
