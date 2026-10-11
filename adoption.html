@@ -45,7 +45,7 @@
   font-size: 1.8rem;
 }
 
-/* Informations avec un espacement identique entre chaque élément */
+/* Informations sous la photo */
 .chat-infos {
   display: flex;
   flex-direction: column;
@@ -55,7 +55,9 @@
 
 .chat-badge {
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px;
   box-sizing: border-box;
   min-width: 0;
   padding: 8px 10px;
@@ -69,7 +71,6 @@
 }
 
 .chat-badge.date-publication {
-  grid-column: 1 / -1;
   font-size: 0.85rem;
   padding: 6px 10px;
 }
@@ -78,7 +79,7 @@
 .chat-description {
   box-sizing: border-box;
   width: 100%;
-  margin: 0;
+  margin: 7px 0;
   padding: 9px 11px;
   border: 1px solid #dce6d7;
   border-radius: 10px;
@@ -612,18 +613,20 @@ function afficherChat(chat) {
   html += '<div class="chat-infos">';
 
   if (age.texte) {
-    html += '<section class="chat-description">' +
-      '<h3>Âge :</h3>' +
-      '<p>' + echapper(age.texte) + '</p>' +
-      '</section>';
+    html += '<div class="chat-badge">' +
+      '<strong>Âge :</strong> ' +
+      '<span>' + echapper(age.texte) + '</span>' +
+      '</div>';
   }
 
   if (chat.sexe) {
-    html += '<section class="chat-description">' +
-      '<h3>Sexe :</h3>' +
-      '<p>' + echapper(chat.sexe) + '</p>' +
-      '</section>';
+    html += '<div class="chat-badge">' +
+      '<strong>Sexe :</strong> ' +
+      '<span>' + echapper(chat.sexe) + '</span>' +
+      '</div>';
   }
+
+  html += '</div>';
 
   if (chat.caractere) {
     html += '<section class="chat-description">' +
@@ -654,13 +657,11 @@ function afficherChat(chat) {
   }
 
   if (chat.date) {
-    html += '<section class="chat-description date-publication">' +
-      '<h3>Date de publication :</h3>' +
-      '<p>' + echapper(dateFr(chat.date)) + '</p>' +
-      '</section>';
+    html += '<div class="chat-badge date-publication">' +
+      '<strong>Date de publication :</strong> ' +
+      '<span>' + echapper(dateFr(chat.date)) + '</span>' +
+      '</div>';
   }
-
-  html += '</div>';
 
   html += '<div class="actions">' +
     '<a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject=' +
