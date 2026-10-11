@@ -26,6 +26,7 @@
   box-shadow: 0 4px 15px #0002;
 }
 
+/* Photos : taille conservée */
 .chat-card > img {
   display: block;
   width: 100%;
@@ -37,20 +38,21 @@
 }
 
 .chat-card-content {
-  padding: 20px;
+  padding: 15px;
   overflow-wrap: anywhere;
 }
 
 .chat-card h2 {
-  margin: 0 0 15px;
+  margin: 0 0 10px;
 }
 
+/* Informations plus compactes */
 .chat-infos {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 10px;
-  margin: 15px 0 20px;
+  gap: 6px;
+  margin: 10px 0 12px;
 }
 
 .chat-badge,
@@ -58,7 +60,7 @@
   display: block;
   box-sizing: border-box;
   width: 100%;
-  padding: 12px 15px;
+  padding: 8px 12px;
   border: 1px solid #dce6d7;
   border-radius: 12px;
   background: #edf2e9;
@@ -68,12 +70,12 @@
 }
 
 .chat-description {
-  margin: 10px 0;
+  margin: 6px 0;
   overflow-wrap: anywhere;
 }
 
 .chat-description h3 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   font-size: 1.05rem;
 }
 
@@ -83,7 +85,7 @@
 }
 
 .chat-description li {
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   padding-left: 2px;
   line-height: 1.5;
 }
@@ -97,7 +99,7 @@
 }
 
 .chat-description p {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   line-height: 1.5;
 }
 
@@ -108,8 +110,8 @@
 .chat-card .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .chat-card .actions .btn {
@@ -133,6 +135,7 @@
   margin: 25px 0;
 }
 
+/* Tri et filtres */
 .filtres-chats {
   display: flex;
   flex-wrap: wrap;
@@ -170,6 +173,7 @@
   color: #52664e;
 }
 
+/* Téléphones : photos inchangées */
 @media (max-width: 700px) {
   #liste-chats {
     grid-template-columns: 1fr;
@@ -181,7 +185,7 @@
   }
 
   .chat-card-content {
-    padding: 16px;
+    padding: 12px;
   }
 }
 </style>
@@ -511,10 +515,7 @@ function paragraphes(t) {
 
 async function lireChat(f) {
   const r = await fetch(f.download_url);
-
-  if (!r.ok) {
-    throw Error("Lecture impossible : " + f.name);
-  }
+  if (!r.ok) throw Error("Lecture impossible : " + f.name);
 
   const o = lireFicheMarkdown(await r.text());
   if (!o) return null;
@@ -608,7 +609,6 @@ function afficherChat(chat) {
     echapper(chat.id) + '">↗ Partager</button></div>';
 
   html += '</div>';
-
   carte.innerHTML = html;
   zone.appendChild(carte);
 }
@@ -658,6 +658,7 @@ async function partagerChat(id, bouton) {
 
     const ancienTexte = bouton.textContent;
     bouton.textContent = "✓ Lien copié !";
+
     setTimeout(() => {
       bouton.textContent = ancienTexte;
     }, 2000);
