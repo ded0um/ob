@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 25px;
-  margin-top: 30px;
+  margin-top: 25px;
   align-items: start;
 }
 
@@ -26,7 +26,6 @@
   box-shadow: 0 4px 15px #0002;
 }
 
-/* Photos : taille conservée */
 .chat-card > img {
   display: block;
   width: 100%;
@@ -38,56 +37,73 @@
 }
 
 .chat-card-content {
-  padding: 15px;
+  padding: 14px;
   overflow-wrap: anywhere;
 }
 
 .chat-card h2 {
   margin: 0 0 10px;
+  font-size: 1.8rem;
 }
 
-/* Informations plus compactes */
+/* Informations sur deux colonnes */
 .chat-infos {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 6px;
-  margin: 10px 0 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0 0 12px;
 }
 
-.chat-badge,
-.chat-description {
-  display: block;
+.chat-badge {
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
-  width: 100%;
-  padding: 8px 12px;
+  min-width: 0;
+  padding: 8px 10px;
   border: 1px solid #dce6d7;
-  border-radius: 12px;
+  border-radius: 10px;
   background: #edf2e9;
   color: #425640;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.93rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
+.chat-badge.date-publication {
+  grid-column: 1 / -1;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+}
+
+/* Descriptions */
 .chat-description {
-  margin: 6px 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 7px 0;
+  padding: 9px 11px;
+  border: 1px solid #dce6d7;
+  border-radius: 10px;
+  background: #edf2e9;
+  color: #425640;
+  font-size: 0.95rem;
+  line-height: 1.45;
   overflow-wrap: anywhere;
 }
 
 .chat-description h3 {
-  margin: 0 0 6px;
-  font-size: 1.05rem;
+  margin: 0 0 5px;
+  font-size: 1rem;
 }
 
 .chat-description ul {
   margin: 0;
-  padding-left: 22px;
+  padding-left: 20px;
 }
 
 .chat-description li {
   margin-bottom: 3px;
   padding-left: 2px;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .chat-description li:last-child {
@@ -99,24 +115,33 @@
 }
 
 .chat-description p {
-  margin: 0 0 6px;
-  line-height: 1.5;
+  margin: 0 0 5px;
+  line-height: 1.45;
 }
 
 .chat-description p:last-child {
   margin-bottom: 0;
 }
 
+/* Boutons côte à côte */
 .chat-card .actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
   margin-top: 12px;
 }
 
 .chat-card .actions .btn {
-  flex: 1 1 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 10px 8px;
+  font-size: 0.88rem;
+  line-height: 1.3;
   text-align: center;
+  white-space: normal;
   cursor: pointer;
 }
 
@@ -132,17 +157,17 @@
 }
 
 #etat-chats {
-  margin: 25px 0;
+  margin: 20px 0;
 }
 
 /* Tri et filtres */
 .filtres-chats {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 12px;
   align-items: end;
-  margin: 25px 0;
-  padding: 16px;
+  margin: 20px 0;
+  padding: 14px;
   border: 1px solid #dce6d7;
   border-radius: 12px;
   background: #f7f9f5;
@@ -159,8 +184,8 @@
 
 .filtres-chats select {
   width: 100%;
-  min-height: 42px;
-  padding: 9px 10px;
+  min-height: 40px;
+  padding: 8px 10px;
   border: 1px solid #cbd8c5;
   border-radius: 8px;
   background: #fff;
@@ -173,19 +198,48 @@
   color: #52664e;
 }
 
-/* Téléphones : photos inchangées */
+/* Tablettes et téléphones */
 @media (max-width: 700px) {
   #liste-chats {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
+  /* On conserve la hauteur actuelle des photos */
   .chat-card > img {
     height: 280px;
   }
 
   .chat-card-content {
     padding: 12px;
+  }
+
+  .chat-card h2 {
+    font-size: 1.65rem;
+  }
+
+  .chat-infos {
+    gap: 6px;
+  }
+
+  .chat-badge {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .chat-card .actions .btn {
+    padding: 10px 6px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .chat-card .actions {
+    flex-wrap: wrap;
+  }
+
+  .chat-card .actions .btn {
+    flex-basis: 100%;
   }
 }
 </style>
@@ -399,6 +453,7 @@ function dateFr(d) {
   });
 }
 
+/* Conversion de l'âge en mois */
 function ageEnMois(age) {
   const texte = String(age || "")
     .toLocaleLowerCase("fr")
@@ -543,6 +598,7 @@ function afficherChat(chat) {
 
   let html = "";
   const photo = cheminImage(chat.image);
+  const age = ageActuel(chat);
 
   if (photo) {
     html += '<img data-enlarge src="' + echapper(photo) +
@@ -552,13 +608,12 @@ function afficherChat(chat) {
   }
 
   html += '<div class="chat-card-content">';
-  html += '<h2>' + echapper(chat.titre) + '</h2>';
+  html += '<h2>🐱 ' + echapper(chat.titre) + '</h2>';
+
   html += '<div class="chat-infos">';
 
-  const age = ageActuel(chat);
-
   if (age.texte) {
-    html += '<div class="chat-badge">🐱 Âge : ' +
+    html += '<div class="chat-badge">Âge : ' +
       echapper(age.texte) + '</div>';
   }
 
@@ -568,7 +623,7 @@ function afficherChat(chat) {
   }
 
   if (chat.date) {
-    html += '<div class="chat-badge">Publié le ' +
+    html += '<div class="chat-badge date-publication">Publié le ' +
       echapper(dateFr(chat.date)) + '</div>';
   }
 
@@ -604,11 +659,12 @@ function afficherChat(chat) {
   html += '<div class="actions">' +
     '<a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject=' +
     encodeURIComponent("Demande d'adoption : " + chat.titre) +
-    '">Me renseigner sur ce chat</a>' +
+    '">Me renseigner</a>' +
     '<button class="btn btn-partager" type="button" data-share-chat="' +
     echapper(chat.id) + '">↗ Partager</button></div>';
 
   html += '</div>';
+
   carte.innerHTML = html;
   zone.appendChild(carte);
 }
@@ -650,6 +706,7 @@ async function partagerChat(id, bouton) {
       champ.style.opacity = "0";
       document.body.appendChild(champ);
       champ.select();
+
       const copie = document.execCommand("copy");
       champ.remove();
 
