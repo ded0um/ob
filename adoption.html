@@ -106,7 +106,27 @@
 }
 
 .chat-card .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 18px;
+}
+
+.chat-card .actions .btn {
+  flex: 1 1 auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.chat-card .btn-partager {
+  border: 1px solid #71866b;
+  background: #edf2e9;
+  color: #425640;
+}
+
+.chat-card.lien-partage-cible {
+  outline: 3px solid #71866b;
+  outline-offset: 4px;
 }
 
 #etat-chats {
@@ -375,7 +395,6 @@ function dateFr(d) {
   });
 }
 
-// Convertit l'âge saisi en nombre de mois.
 function ageEnMois(age) {
   const texte = String(age || "")
     .toLocaleLowerCase("fr")
@@ -411,7 +430,6 @@ function ageEnMois(age) {
     trouve = true;
   }
 
-  // Si seul un nombre est saisi, il est interprété comme un nombre de mois.
   if (!trouve && /^\d+(?:\.\d+)?$/.test(texte.trim())) {
     mois = Number(texte.trim());
     trouve = true;
@@ -442,7 +460,6 @@ function ageActuel(chat) {
     return { texte: chat.age || "", mois: null };
   }
 
-  // Pour les anciennes fiches sans date_age, la date de publication sert de référence.
   const reference = chat.dateAge || chat.date;
   const total = base + moisEcoules(reference);
 
@@ -503,6 +520,7 @@ async function lireChat(f) {
   if (!o) return null;
 
   return {
+    id: f.name.replace(/\.md$/i, ""),
     titre: o.title || "",
     date: o.date || "",
     image: o.image || "",
@@ -520,6 +538,7 @@ async function lireChat(f) {
 function afficherChat(chat) {
   const carte = document.createElement("article");
   carte.className = "chat-card reveal";
+  carte.id = "chat-" + chat.id;
 
   let html = "";
   const photo = cheminImage(chat.image);
@@ -584,13 +603,78 @@ function afficherChat(chat) {
   html += '<div class="actions">' +
     '<a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject=' +
     encodeURIComponent("Demande d'adoption : " + chat.titre) +
-    '">Me renseigner sur ce chat</a></div>';
+    '">Me renseigner sur ce chat</a>' +
+    '<button class="btn btn-partager" type="button" data-share-chat="' +
+    echapper(chat.id) + '">↗ Partager</button></div>';
 
   html += '</div>';
 
   carte.innerHTML = html;
   zone.appendChild(carte);
 }
+
+async function partagerChat(id, bouton) {
+  const chat = tousLesChats.find(c => c.id === id);
+  if (!chat) return;
+
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.hash = "";
+  url.searchParams.set("chat", chat.id);
+
+  const donnees = {
+    title: chat.titre + " cherche une famille",
+    text: "Découvrez " + chat.titre +
+      ", proposé à l'adoption par Ô Bonheur des Nanouts.",
+    url: url.toString()
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(donnees);
+    } catch (erreur) {
+      if (erreur && erreur.name !== "AbortError") {
+        console.error("Partage impossible :", erreur);
+      }
+    }
+    return;
+  }
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(donnees.url);
+    } else {
+      const champ = document.createElement("textarea");
+      champ.value = donnees.url;
+      champ.style.position = "fixed";
+      champ.style.opacity = "0";
+      document.body.appendChild(champ);
+      champ.select();
+      const copie = document.execCommand("copy");
+      champ.remove();
+
+      if (!copie) throw new Error("Copie non prise en charge");
+    }
+
+    const ancienTexte = bouton.textContent;
+    bouton.textContent = "✓ Lien copié !";
+    setTimeout(() => {
+      bouton.textContent = ancienTexte;
+    }, 2000);
+  } catch (erreur) {
+    window.prompt(
+      "Copiez le lien pour partager cette fiche :",
+      donnees.url
+    );
+  }
+}
+
+zone.addEventListener("click", event => {
+  const bouton = event.target.closest("[data-share-chat]");
+  if (!bouton) return;
+
+  partagerChat(bouton.dataset.shareChat, bouton);
+});
 
 function afficherListeFiltree() {
   const sexeChoisi = filtreSexe.value;
@@ -673,7 +757,9 @@ function afficherListeFiltree() {
 
   resultatsFiltres.hidden = false;
   resultatsFiltres.textContent =
-    chats.length + (chats.length > 1 ? " chats affichés" : " chat affiché");
+    chats.length + (chats.length > 1
+      ? " chats affichés"
+      : " chat affiché");
 
   chats.forEach(afficherChat);
 
@@ -681,6 +767,21 @@ function afficherListeFiltree() {
     zone.querySelectorAll(".chat-card").forEach(carte => {
       carte.classList.add("visible");
     });
+
+    const idPartage =
+      new URLSearchParams(window.location.search).get("chat");
+
+    if (idPartage) {
+      const cible = document.getElementById("chat-" + idPartage);
+
+      if (cible) {
+        cible.classList.add("lien-partage-cible");
+        cible.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
   }));
 }
 
