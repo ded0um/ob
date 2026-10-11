@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -45,7 +46,7 @@
   font-size: 1.8rem;
 }
 
-/* Informations sous la photo */
+/* Informations avec un espacement identique */
 .chat-infos {
   display: flex;
   flex-direction: column;
@@ -53,33 +54,13 @@
   margin: 0 0 12px;
 }
 
+/* Même présentation pour toutes les rubriques */
+.chat-description,
 .chat-badge {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 5px;
-  box-sizing: border-box;
-  min-width: 0;
-  padding: 8px 10px;
-  border: 1px solid #dce6d7;
-  border-radius: 10px;
-  background: #edf2e9;
-  color: #425640;
-  font-size: 0.93rem;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-}
-
-.chat-badge.date-publication {
-  font-size: 0.85rem;
-  padding: 6px 10px;
-}
-
-/* Descriptions */
-.chat-description {
   box-sizing: border-box;
   width: 100%;
-  margin: 7px 0;
+  min-width: 0;
+  margin: 0;
   padding: 9px 11px;
   border: 1px solid #dce6d7;
   border-radius: 10px;
@@ -90,9 +71,27 @@
   overflow-wrap: anywhere;
 }
 
-.chat-description h3 {
-  margin: 0 0 5px;
-  font-size: 1rem;
+/* Titres identiques */
+.chat-description h3,
+.chat-badge strong {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: #425640;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: inherit;
+}
+
+/* Texte normal */
+.chat-description span {
+  font-weight: 400;
+}
+
+.chat-description p {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .chat-description ul {
@@ -114,13 +113,9 @@
   color: #71866b;
 }
 
-.chat-description p {
-  margin: 0 0 5px;
-  line-height: 1.45;
-}
-
-.chat-description p:last-child {
-  margin-bottom: 0;
+.chat-badge.date-publication {
+  font-size: 0.95rem;
+  padding: 9px 11px;
 }
 
 /* Boutons côte à côte */
@@ -222,8 +217,14 @@
     gap: 7px;
   }
 
+  .chat-description,
   .chat-badge {
     padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .chat-description h3,
+  .chat-badge strong {
     font-size: 0.9rem;
   }
 
@@ -626,33 +627,31 @@ function afficherChat(chat) {
       '</div>';
   }
 
-  html += '</div>';
-
-  if (chat.caractere) {
+  if (chat.caractere && chat.caractere.trim()) {
     html += '<section class="chat-description">' +
-      '<h3>Caractère :</h3>' +
-      paragraphes(chat.caractere) +
+      '<h3>Caractère :</h3> ' +
+      '<span>' + echapper(chat.caractere.trim()).replace(/\r?\n/g, "<br>") + '</span>' +
       '</section>';
   }
 
-  if (chat.conditions) {
+  if (chat.conditions && chat.conditions.trim()) {
     html += '<section class="chat-description">' +
-      '<h3>Conditions d’adoption :</h3>' +
-      paragraphes(chat.conditions) +
+      '<h3>Conditions d’adoption :</h3> ' +
+      '<span>' + echapper(chat.conditions.trim()).replace(/\r?\n/g, "<br>") + '</span>' +
       '</section>';
   }
 
-  if (chat.histoire) {
+  if (chat.histoire && chat.histoire.trim()) {
     html += '<section class="chat-description">' +
-      '<h3>Son histoire :</h3>' +
-      paragraphes(chat.histoire) +
+      '<h3>Son histoire :</h3> ' +
+      '<span>' + echapper(chat.histoire.trim()).replace(/\r?\n/g, "<br>") + '</span>' +
       '</section>';
   }
 
-  if (chat.body) {
+  if (chat.body && chat.body.trim()) {
     html += '<section class="chat-description">' +
-      '<h3>Informations complémentaires :</h3>' +
-      paragraphes(chat.body) +
+      '<h3>Informations complémentaires :</h3> ' +
+      '<span>' + echapper(chat.body.trim()).replace(/\r?\n/g, "<br>") + '</span>' +
       '</section>';
   }
 
@@ -662,6 +661,8 @@ function afficherChat(chat) {
       '<span>' + echapper(dateFr(chat.date)) + '</span>' +
       '</div>';
   }
+
+  html += '</div>';
 
   html += '<div class="actions">' +
     '<a class="btn btn-primary" href="mailto:obonheurdesnanouts@gmail.com?subject=' +
