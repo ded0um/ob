@@ -24,7 +24,37 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Présentation générale des publications */
+    .news-sort {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      margin: 0 0 1.8rem;
+    }
+
+    .news-sort label {
+      font-weight: 600;
+      color: #4c5748;
+    }
+
+    .news-sort select {
+      max-width: 100%;
+      padding: 0.7rem 2.2rem 0.7rem 0.9rem;
+      border: 1px solid #cbd4c5;
+      border-radius: 10px;
+      background: #fff;
+      color: #394336;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .news-count {
+      margin-right: auto;
+      color: #687363;
+      font-size: 0.9rem;
+    }
+
     .news-card {
       margin: 0 0 2.5rem;
       padding: 1.5rem;
@@ -47,7 +77,6 @@
       line-height: 1.35;
     }
 
-    /* Photo et texte côte à côte */
     .news-layout {
       display: flex;
       align-items: flex-start;
@@ -85,7 +114,6 @@
       margin: 0 0 1rem;
     }
 
-    /* Lettrine façon livre */
     .news-body p:first-of-type::first-letter {
       float: left;
       color: #71866b;
@@ -95,12 +123,11 @@
       padding: 0.08em 0.12em 0 0;
     }
 
-    /* Un article sur deux avec la photo à droite */
+    /* Photo à droite pour une publication sur deux */
     .news-card:nth-child(even) .news-layout {
       flex-direction: row-reverse;
     }
 
-    /* Sans photo : le texte utilise toute la largeur */
     .news-layout.sans-photo .news-body {
       width: 100%;
     }
@@ -116,8 +143,11 @@
       background: #fff4ed;
     }
 
-    /* Affichage sur téléphone */
     @media (max-width: 650px) {
+      .news-sort {
+        justify-content: flex-start;
+      }
+
       .news-card {
         padding: 1rem;
         margin-bottom: 1.5rem;
@@ -153,11 +183,8 @@
         <span>Ô Bonheur des Nanouts</span>
       </a>
 
-      <button
-        class="nav-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="menu-principal">
+      <button class="nav-toggle" type="button"
+        aria-expanded="false" aria-controls="menu-principal">
         ☰ Menu
       </button>
 
@@ -176,9 +203,7 @@
     <section class="page-hero">
       <div class="container">
         <div class="eyebrow">La vie de notre association</div>
-
         <h1>Nos nouvelles</h1>
-
         <p class="lead">
           Sauvetages, nouvelles de nos protégés, avancée de nos projets,
           collectes, événements et appels aux dons : retrouvez ici toutes
@@ -189,6 +214,17 @@
 
     <section class="section">
       <div class="container content">
+
+        <div class="news-sort" id="commandes-tri" hidden>
+          <span class="news-count" id="nombre-nouvelles"></span>
+
+          <label for="ordre-nouvelles">Trier les publications :</label>
+
+          <select id="ordre-nouvelles">
+            <option value="recent">Plus récentes → plus anciennes</option>
+            <option value="ancien">Plus anciennes → plus récentes</option>
+          </select>
+        </div>
 
         <div id="liste-nouvelles" aria-live="polite">
           <p class="news-status">
@@ -201,11 +237,9 @@
             Pour suivre nos actions au quotidien, retrouvez-nous également sur Facebook.
           </p>
 
-          <a
-            class="btn btn-primary"
+          <a class="btn btn-primary"
             href="https://www.facebook.com/share/19uXb3B98p/"
-            target="_blank"
-            rel="noopener noreferrer">
+            target="_blank" rel="noopener noreferrer">
             Suivre l'association sur Facebook ↗
           </a>
         </div>
@@ -221,15 +255,11 @@
         obonheurdesnanouts@gmail.com
       </a>
       <br>
-      <span>
-        © <span id="year">2026</span> Ô Bonheur des Nanouts
-      </span>
+      <span>© <span id="year">2026</span> Ô Bonheur des Nanouts</span>
     </div>
   </footer>
 
-  <a
-    class="btn floating-donate"
-    href="faire-un-don.html"
+  <a class="btn floating-donate" href="faire-un-don.html"
     aria-label="Faire un don à l'association">
     ♡ Faire un don
   </a>
@@ -245,6 +275,11 @@
     const depot = "ded0um/ob";
     const dossier = "_nouvelles";
     const liste = document.getElementById("liste-nouvelles");
+    const commandesTri = document.getElementById("commandes-tri");
+    const selectOrdre = document.getElementById("ordre-nouvelles");
+    const nombreNouvelles = document.getElementById("nombre-nouvelles");
+
+    let publications = [];
 
     function echapper(texte) {
       return String(texte || "").replace(/[&<>"']/g, caractere => ({
@@ -266,9 +301,7 @@
 
       if (!resultat) return "";
 
-      return resultat[1]
-        .trim()
-        .replace(/^["']|["']$/g, "");
+      return resultat[1].trim().replace(/^["']|["']$/g, "");
     }
 
     function convertirTexte(texte) {
@@ -308,22 +341,19 @@
       `;
     }
 
-    function afficherArticle(texte) {
-      const correspondance = texte.match(
-        /^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/
-      );
+    function lireDate(date) {
+      if (!date) return 0;
 
-      if (!correspondance) return "";
+      const valeur = Date.parse(date + "T12:00:00");
+      return Number.isNaN(valeur) ? 0 : valeur;
+    }
 
-      const meta = correspondance[1];
-      const corps = correspondance[2].trim();
-
-      const titre =
-        lireChamp(meta, "title") || "Nouvelle de l'association";
-
-      const date = lireChamp(meta, "date");
-      const image = lireChamp(meta, "image");
-      const image2 = lireChamp(meta, "image2");
+    function afficherArticle(publication, index) {
+      const titre = publication.titre;
+      const date = publication.date;
+      const corps = publication.corps;
+      const image = publication.image;
+      const image2 = publication.image2;
 
       let dateAffichee = "";
 
@@ -349,9 +379,7 @@
           <h2>${echapper(titre)}</h2>
 
           <div class="news-layout ${photos ? "" : "sans-photo"}">
-            ${photos
-              ? `<div class="news-media">${photos}</div>`
-              : ""}
+            ${photos ? `<div class="news-media">${photos}</div>` : ""}
 
             <div class="news-body">
               ${convertirTexte(corps)}
@@ -359,6 +387,23 @@
           </div>
         </article>
       `;
+    }
+
+    function afficherPublications() {
+      const ordre = selectOrdre.value;
+
+      const triees = [...publications].sort((a, b) => {
+        const difference = lireDate(b.date) - lireDate(a.date);
+        return ordre === "recent" ? difference : -difference;
+      });
+
+      nombreNouvelles.textContent =
+        publications.length +
+        (publications.length > 1 ? " publications" : " publication");
+
+      liste.innerHTML = triees
+        .map((publication, index) => afficherArticle(publication, index))
+        .join("");
     }
 
     async function chargerNouvelles() {
@@ -410,19 +455,36 @@
           return;
         }
 
-        const articles = await Promise.all(
+        const resultats = await Promise.all(
           markdowns.map(async fichier => {
             const contenu = await fetch(fichier.download_url);
 
-            if (!contenu.ok) return "";
+            if (!contenu.ok) return null;
 
-            return afficherArticle(await contenu.text());
+            const texte = await contenu.text();
+
+            const correspondance = texte.match(
+              /^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/
+            );
+
+            if (!correspondance) return null;
+
+            const meta = correspondance[1];
+            const corps = correspondance[2].trim();
+
+            return {
+              titre: lireChamp(meta, "title") || "Nouvelle de l'association",
+              date: lireChamp(meta, "date"),
+              image: lireChamp(meta, "image"),
+              image2: lireChamp(meta, "image2"),
+              corps: corps
+            };
           })
         );
 
-        const visibles = articles.filter(Boolean);
+        publications = resultats.filter(Boolean);
 
-        if (visibles.length === 0) {
+        if (publications.length === 0) {
           liste.innerHTML = `
             <p class="news-status">
               Aucune publication lisible pour le moment.
@@ -432,13 +494,11 @@
           return;
         }
 
-        liste.innerHTML = visibles.reverse().join("");
+        commandesTri.hidden = false;
+        afficherPublications();
 
       } catch (erreur) {
-        console.error(
-          "Erreur de chargement des nouvelles :",
-          erreur
-        );
+        console.error("Erreur de chargement des nouvelles :", erreur);
 
         liste.innerHTML = `
           <p class="news-status news-error">
@@ -448,6 +508,8 @@
         `;
       }
     }
+
+    selectOrdre.addEventListener("change", afficherPublications);
 
     chargerNouvelles();
   </script>
