@@ -6,41 +6,53 @@ media:
     output: /images/chats
     categories: [image]
 
-  - name: sauvetages
-    label: Photos des sauvetages
-    input: images/sauvetages
-    output: /images/sauvetages
+  - name: nouvelles
+    label: Photos des nouvelles
+    input: images/nouvelles
+    output: /images/nouvelles
     categories: [image]
 
 content:
-  # NOS SAUVETAGES
-  - name: sauvetages
-    label: Nos sauvetages
+  - name: nouvelles
+    label: Nos nouvelles
     type: collection
-    path: _sauvetages
+    path: _nouvelles
     filename: "{year}-{month}-{day}-{primary}.md"
     fields:
       - name: title
-        label: Titre du sauvetage
+        label: Titre
         type: string
         required: true
 
       - name: date
-        label: Date du sauvetage
+        label: Date de publication
         type: date
         required: true
 
       - name: image
-        label: Photo du chat
+        label: Première photo (facultative)
         type: image
-        required: true
         options:
-          media: sauvetages
+          media: nouvelles
+
+      - name: image2
+        label: Deuxième photo (facultative)
+        type: image
+        options:
+          media: nouvelles
 
       - name: body
-        label: Histoire du sauvetage
+        label: Texte de la nouvelle
         type: rich-text
         required: true
+
+
+
+
+
+
+
+
 
   # TOUS LES CHATS : ADOPTION ET FAMILLES
   - name: chats
