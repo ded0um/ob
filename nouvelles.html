@@ -24,37 +24,85 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
+    /* Présentation générale des publications */
     .news-card {
-      margin-bottom: 2rem;
+      margin: 0 0 2.5rem;
       padding: 1.5rem;
-      border-radius: 16px;
+      border: 1px solid rgba(113, 134, 107, 0.18);
+      border-radius: 18px;
       background: #fff;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+      box-shadow: 0 5px 22px rgba(45, 55, 40, 0.06);
+      overflow: hidden;
     }
 
     .news-date {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       color: #71866b;
       font-size: 0.9rem;
       font-weight: 600;
     }
 
     .news-card h2 {
-      margin-top: 0;
+      margin: 0 0 1.2rem;
+      line-height: 1.35;
+    }
+
+    /* Photo et texte côte à côte */
+    .news-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .news-media {
+      flex: 0 0 42%;
+      min-width: 0;
     }
 
     .news-image {
       display: block;
       width: 100%;
-      max-width: 750px;
-      max-height: 500px;
-      margin: 1rem auto;
-      object-fit: contain;
-      border-radius: 12px;
+      max-height: 340px;
+      margin: 0 0 0.8rem;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px;
+    }
+
+    .news-media .news-image:last-child {
+      margin-bottom: 0;
+    }
+
+    .news-body {
+      flex: 1;
+      min-width: 0;
+      color: #44483f;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
     }
 
     .news-body p {
-      line-height: 1.7;
+      margin: 0 0 1rem;
+    }
+
+    /* Lettrine façon livre */
+    .news-body p:first-of-type::first-letter {
+      float: left;
+      color: #71866b;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 3.4em;
+      line-height: 0.85;
+      padding: 0.08em 0.12em 0 0;
+    }
+
+    /* Un article sur deux avec la photo à droite */
+    .news-card:nth-child(even) .news-layout {
+      flex-direction: row-reverse;
+    }
+
+    /* Sans photo : le texte utilise toute la largeur */
+    .news-layout.sans-photo .news-body {
+      width: 100%;
     }
 
     .news-status {
@@ -66,6 +114,31 @@
 
     .news-error {
       background: #fff4ed;
+    }
+
+    /* Affichage sur téléphone */
+    @media (max-width: 650px) {
+      .news-card {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .news-layout,
+      .news-card:nth-child(even) .news-layout {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .news-media {
+        flex: auto;
+        width: 100%;
+      }
+
+      .news-image {
+        max-height: 320px;
+        object-fit: contain;
+        background: #f8f8f5;
+      }
     }
   </style>
 </head>
@@ -262,6 +335,11 @@
         }
       }
 
+      const photos = [image, image2]
+        .filter(Boolean)
+        .map(chemin => afficherImage(chemin, titre))
+        .join("");
+
       return `
         <article class="news-card">
           ${dateAffichee
@@ -270,13 +348,15 @@
 
           <h2>${echapper(titre)}</h2>
 
-          ${afficherImage(image, titre)}
+          <div class="news-layout ${photos ? "" : "sans-photo"}">
+            ${photos
+              ? `<div class="news-media">${photos}</div>`
+              : ""}
 
-          <div class="news-body">
-            ${convertirTexte(corps)}
+            <div class="news-body">
+              ${convertirTexte(corps)}
+            </div>
           </div>
-
-          ${afficherImage(image2, titre)}
         </article>
       `;
     }
@@ -336,9 +416,7 @@
 
             if (!contenu.ok) return "";
 
-            const texte = await contenu.text();
-
-            return afficherArticle(texte);
+            return afficherArticle(await contenu.text());
           })
         );
 
