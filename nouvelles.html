@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <meta name="description" content="Découvrez les nouvelles, les sauvetages, les collectes et les événements de Ô Bonheur des Nanouts.">
   <meta name="theme-color" content="#71866b">
 
@@ -14,10 +15,59 @@
   <meta property="og:title" content="Nos nouvelles | Ô Bonheur des Nanouts">
   <meta property="og:description" content="Les nouvelles et les actions de Ô Bonheur des Nanouts.">
   <meta property="og:image" content="https://ded0um.github.io/ob/images/icone-partage.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
   <meta property="og:url" content="https://ded0um.github.io/ob/nouvelles.html">
   <meta property="og:type" content="website">
 
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .news-card {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    }
+
+    .news-date {
+      margin-bottom: 0.5rem;
+      color: #71866b;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .news-card h2 {
+      margin-top: 0;
+    }
+
+    .news-image {
+      display: block;
+      width: 100%;
+      max-width: 750px;
+      max-height: 500px;
+      margin: 1rem auto;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .news-body p {
+      line-height: 1.7;
+    }
+
+    .news-status {
+      padding: 1rem;
+      border-radius: 12px;
+      background: #f4f6f1;
+      line-height: 1.6;
+    }
+
+    .news-error {
+      background: #fff4ed;
+    }
+  </style>
 </head>
 
 <body>
@@ -30,8 +80,13 @@
         <span>Ô Bonheur des Nanouts</span>
       </a>
 
-      <button class="nav-toggle" type="button"
-        aria-expanded="false" aria-controls="menu-principal">☰ Menu</button>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-principal">
+        ☰ Menu
+      </button>
 
       <nav class="main-nav" id="menu-principal" aria-label="Navigation principale">
         <a href="index.html">Accueil</a>
@@ -48,7 +103,9 @@
     <section class="page-hero">
       <div class="container">
         <div class="eyebrow">La vie de notre association</div>
+
         <h1>Nos nouvelles</h1>
+
         <p class="lead">
           Sauvetages, nouvelles de nos protégés, avancée de nos projets,
           collectes, événements et appels aux dons : retrouvez ici toutes
@@ -59,19 +116,27 @@
 
     <section class="section">
       <div class="container content">
+
         <div id="liste-nouvelles" aria-live="polite">
-          <p>Chargement des nouvelles de l'association…</p>
+          <p class="news-status">
+            Chargement des nouvelles de l'association…
+          </p>
         </div>
 
-        <p class="reveal">
-          Pour suivre nos actions au quotidien, retrouvez-nous également sur Facebook.
-        </p>
+        <div class="reveal">
+          <p>
+            Pour suivre nos actions au quotidien, retrouvez-nous également sur Facebook.
+          </p>
 
-        <a class="btn btn-primary reveal"
-          href="https://www.facebook.com/share/19uXb3B98p/"
-          target="_blank" rel="noopener noreferrer">
-          Suivre l'association sur Facebook ↗
-        </a>
+          <a
+            class="btn btn-primary"
+            href="https://www.facebook.com/share/19uXb3B98p/"
+            target="_blank"
+            rel="noopener noreferrer">
+            Suivre l'association sur Facebook ↗
+          </a>
+        </div>
+
       </div>
     </section>
   </main>
@@ -79,14 +144,22 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <strong>Ô Bonheur des Nanouts</strong> ·
-      <a href="mailto:obonheurdesnanouts@gmail.com">obonheurdesnanouts@gmail.com</a>
+      <a href="mailto:obonheurdesnanouts@gmail.com">
+        obonheurdesnanouts@gmail.com
+      </a>
       <br>
-      <span>© <span id="year">2026</span> Ô Bonheur des Nanouts</span>
+      <span>
+        © <span id="year">2026</span> Ô Bonheur des Nanouts
+      </span>
     </div>
   </footer>
 
-  <a class="btn floating-donate" href="faire-un-don.html"
-    aria-label="Faire un don à l'association">♡ Faire un don</a>
+  <a
+    class="btn floating-donate"
+    href="faire-un-don.html"
+    aria-label="Faire un don à l'association">
+    ♡ Faire un don
+  </a>
 
   <div class="photo-modal" aria-hidden="true" role="dialog" aria-label="Photo agrandie">
     <button type="button" aria-label="Fermer la photo">×</button>
@@ -96,26 +169,33 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    const dossier = "_nouvelles";
     const depot = "ded0um/ob";
+    const dossier = "_nouvelles";
     const liste = document.getElementById("liste-nouvelles");
 
     function echapper(texte) {
-      return String(texte || "").replace(/[&<>"']/g, c => ({
+      return String(texte || "").replace(/[&<>"']/g, caractere => ({
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
         '"': "&quot;",
         "'": "&#39;"
-      })[c]);
+      })[caractere]);
     }
 
     function lireChamp(texte, nom) {
-      const resultat = texte.match(
-        new RegExp("^" + nom + ":\\\\s*(.*)$", "m")
+      const expression = new RegExp(
+        "^" + nom + ":\\s*(.*)$",
+        "m"
       );
+
+      const resultat = texte.match(expression);
+
       if (!resultat) return "";
-      return resultat[1].trim().replace(/^["']|["']$/g, "");
+
+      return resultat[1]
+        .trim()
+        .replace(/^["']|["']$/g, "");
     }
 
     function convertirTexte(texte) {
@@ -126,101 +206,168 @@
             .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
             .replace(/\*(.+?)\*/g, "<em>$1</em>")
             .replace(/\n/g, "<br>");
+
           return contenu ? "<p>" + contenu + "</p>" : "";
         })
         .join("");
     }
 
-    function afficherArticle(fichier) {
-      const brut = atob(fichier.content.replace(/\n/g, ""));
-      const octets = Uint8Array.from(brut, c => c.charCodeAt(0));
-      const texte = new TextDecoder("utf-8").decode(octets);
+    function cheminImage(chemin) {
+      if (!chemin) return "";
 
-      const correspondance = texte.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+      if (/^https?:\/\//i.test(chemin)) {
+        return chemin;
+      }
+
+      return "https://ded0um.github.io/ob/" +
+        chemin.replace(/^\/+/, "");
+    }
+
+    function afficherImage(chemin, titre) {
+      if (!chemin) return "";
+
+      return `
+        <img
+          class="news-image"
+          src="${echapper(cheminImage(chemin))}"
+          alt="${echapper(titre)}"
+          loading="lazy">
+      `;
+    }
+
+    function afficherArticle(texte) {
+      const correspondance = texte.match(
+        /^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/
+      );
+
       if (!correspondance) return "";
 
       const meta = correspondance[1];
       const corps = correspondance[2].trim();
-      const titre = lireChamp(meta, "title") || "Nouvelle de l'association";
+
+      const titre =
+        lireChamp(meta, "title") || "Nouvelle de l'association";
+
       const date = lireChamp(meta, "date");
       const image = lireChamp(meta, "image");
       const image2 = lireChamp(meta, "image2");
 
-      function cheminImage(chemin) {
-        if (!chemin) return "";
-        if (/^https?:\/\//i.test(chemin)) return chemin;
-        return chemin.startsWith("/")
-          ? "https://ded0um.github.io/ob" + chemin
-          : chemin;
-      }
+      let dateAffichee = "";
 
-      function baliseImage(chemin, description) {
-        if (!chemin) return "";
-        const src = cheminImage(chemin);
-        return '<img class="news-image" src="' + echapper(src) +
-          '" alt="' + echapper(description) +
-          '" loading="lazy">';
-      }
+      if (date) {
+        const dateObjet = new Date(date + "T12:00:00");
 
-      const dateAffichee = date
-        ? new Date(date + "T12:00:00").toLocaleDateString("fr-FR")
-        : "";
+        if (!isNaN(dateObjet.getTime())) {
+          dateAffichee = dateObjet.toLocaleDateString("fr-FR");
+        }
+      }
 
       return `
-        <article class="news-card reveal">
-          ${dateAffichee ? `<div class="news-date">${echapper(dateAffichee)}</div>` : ""}
+        <article class="news-card">
+          ${dateAffichee
+            ? `<div class="news-date">${echapper(dateAffichee)}</div>`
+            : ""}
+
           <h2>${echapper(titre)}</h2>
-          ${baliseImage(image, titre)}
-          <div class="news-body">${convertirTexte(corps)}</div>
-          ${image2 ? baliseImage(image2, titre) : ""}
+
+          ${afficherImage(image, titre)}
+
+          <div class="news-body">
+            ${convertirTexte(corps)}
+          </div>
+
+          ${afficherImage(image2, titre)}
         </article>
       `;
     }
 
     async function chargerNouvelles() {
+      liste.innerHTML = `
+        <p class="news-status">
+          Chargement des nouvelles de l'association…
+        </p>
+      `;
+
       try {
-        const reponse = await fetch(
-          "https://api.github.com/repos/" + depot + "/contents/" + dossier
-        );
+        const url =
+          "https://api.github.com/repos/" +
+          depot +
+          "/contents/" +
+          dossier;
+
+        const reponse = await fetch(url);
 
         if (reponse.status === 404) {
-          liste.innerHTML =
-            "<p>Les premières nouvelles de l'association seront bientôt publiées ici.</p>";
+          liste.innerHTML = `
+            <p class="news-status">
+              Les premières nouvelles de l'association seront bientôt publiées ici.
+            </p>
+          `;
           return;
         }
 
-        if (!reponse.ok) throw new Error("Chargement impossible");
+        if (!reponse.ok) {
+          throw new Error("Erreur GitHub : " + reponse.status);
+        }
 
         const fichiers = await reponse.json();
-        const markdowns = fichiers.filter(f => f.name.endsWith(".md"));
+
+        if (!Array.isArray(fichiers)) {
+          throw new Error("Le dossier des nouvelles est illisible.");
+        }
+
+        const markdowns = fichiers.filter(fichier =>
+          fichier.type === "file" &&
+          fichier.name.toLowerCase().endsWith(".md")
+        );
+
+        if (markdowns.length === 0) {
+          liste.innerHTML = `
+            <p class="news-status">
+              Les premières nouvelles de l'association seront bientôt publiées ici.
+            </p>
+          `;
+          return;
+        }
 
         const articles = await Promise.all(
           markdowns.map(async fichier => {
             const contenu = await fetch(fichier.download_url);
+
             if (!contenu.ok) return "";
+
             const texte = await contenu.text();
 
-            return afficherArticle({
-              content: btoa(
-                Array.from(new TextEncoder().encode(texte),
-                  b => String.fromCharCode(b)).join("")
-              )
-            });
+            return afficherArticle(texte);
           })
         );
 
         const visibles = articles.filter(Boolean);
 
-        if (!visibles.length) {
-          liste.innerHTML =
-            "<p>Les premières nouvelles de l'association seront bientôt publiées ici.</p>";
+        if (visibles.length === 0) {
+          liste.innerHTML = `
+            <p class="news-status">
+              Aucune publication lisible pour le moment.
+              Vérifiez le format des articles dans PagesCMS.
+            </p>
+          `;
           return;
         }
 
         liste.innerHTML = visibles.reverse().join("");
+
       } catch (erreur) {
-        liste.innerHTML =
-          "<p>Les nouvelles ne peuvent pas être chargées pour le moment. Merci de réessayer plus tard.</p>";
+        console.error(
+          "Erreur de chargement des nouvelles :",
+          erreur
+        );
+
+        liste.innerHTML = `
+          <p class="news-status news-error">
+            Impossible de charger les nouvelles pour le moment.
+            Merci de réessayer plus tard.
+          </p>
+        `;
       }
     }
 
