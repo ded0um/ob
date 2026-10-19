@@ -4,23 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <meta name="description" content="Les actualités, collectes et campagnes de Ô Bonheur des Nanouts.">
+  <meta name="description" content="Découvrez les nouvelles, les sauvetages, les collectes et les événements de Ô Bonheur des Nanouts.">
   <meta name="theme-color" content="#71866b">
 
-  <title>Nos actualités | Ô Bonheur des Nanouts</title>
+  <title>Nos nouvelles | Ô Bonheur des Nanouts</title>
 
-  <!-- Icône du site -->
   <link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
 
-  <!-- Informations de partage -->
-  <meta property="og:title" content="Nos actualités | Ô Bonheur des Nanouts">
-  <meta property="og:description" content="Les actualités, collectes et campagnes de Ô Bonheur des Nanouts.">
+  <meta property="og:title" content="Nos nouvelles | Ô Bonheur des Nanouts">
+  <meta property="og:description" content="Les nouvelles et les actions de Ô Bonheur des Nanouts.">
   <meta property="og:image" content="https://ded0um.github.io/ob/images/icone-partage.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
-  <meta property="og:url" content="https://ded0um.github.io/ob/actualites.html">
+  <meta property="og:url" content="https://ded0um.github.io/ob/nouvelles.html">
   <meta property="og:type" content="website">
 
   <link rel="stylesheet" href="style.css">
@@ -36,47 +30,48 @@
         <span>Ô Bonheur des Nanouts</span>
       </a>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">☰ Menu</button>
+      <button class="nav-toggle" type="button"
+        aria-expanded="false" aria-controls="menu-principal">☰ Menu</button>
 
-    <nav class="main-nav" id="menu-principal" aria-label="Navigation principale">
-      <a href="index.html">Accueil</a>
-      <a href="nouvelles.html" aria-current="page">Nos nouvelles</a>
-      <a href="adoption.html">Chats à l'adoption</a>
-      <a href="familles.html">Ils ont trouvé leur famille</a>
-      <a href="faq.html">FAQ</a>
-      <a class="nav-donate" href="faire-un-don.html">♡ Faire un don</a>
-    </nav>
+      <nav class="main-nav" id="menu-principal" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="nouvelles.html" aria-current="page">Nos nouvelles</a>
+        <a href="adoption.html">Chats à l'adoption</a>
+        <a href="familles.html">Ils ont trouvé leur famille</a>
+        <a href="faq.html">FAQ</a>
+        <a class="nav-donate" href="faire-un-don.html">♡ Faire un don</a>
+      </nav>
     </div>
   </header>
 
   <main id="contenu">
     <section class="page-hero">
       <div class="container">
-        <div class="eyebrow">Les nouvelles de l'association</div>
-        <h1>Nos actualités</h1>
-        <p class="lead">Collectes, campagnes de stérilisation, événements, appels aux dons et nouvelles importantes de l'association.</p>
+        <div class="eyebrow">La vie de notre association</div>
+        <h1>Nos nouvelles</h1>
+        <p class="lead">
+          Sauvetages, nouvelles de nos protégés, avancée de nos projets,
+          collectes, événements et appels aux dons : retrouvez ici toutes
+          les nouvelles de l'association.
+        </p>
       </div>
     </section>
 
     <section class="section">
       <div class="container content">
-        <div class="highlight reveal">
-          <strong>Comment publier une actualité ?</strong>
-          <p>Ajoutez un nouvel encadré ci-dessous avec une date, un titre, un texte et éventuellement une photo. Ensuite, envoyez le fichier actualites.html mis à jour sur GitHub.</p>
+        <div id="liste-nouvelles" aria-live="polite">
+          <p>Chargement des nouvelles de l'association…</p>
         </div>
 
-        <article class="news-card reveal">
-          <div class="news-date">Actualité à compléter</div>
-          <h2>Titre de votre actualité</h2>
-          <p>Remplacez ce texte par les dernières nouvelles de l'association : collecte, appel aux dons, campagne de stérilisation, événement ou urgence vétérinaire.</p>
-          <p class="note">Ajoutez ici une photo si nécessaire.</p>
-        </article>
+        <p class="reveal">
+          Pour suivre nos actions au quotidien, retrouvez-nous également sur Facebook.
+        </p>
 
-        <div class="placeholder reveal">Les prochaines actualités apparaîtront ici.</div>
-
-        <p class="reveal">Pour suivre les nouvelles au fil de l'eau, retrouvez-nous aussi sur Facebook.</p>
-
-        <a class="btn btn-primary reveal" href="https://www.facebook.com/share/19uXb3B98p/" target="_blank" rel="noopener noreferrer">Suivre l'association sur Facebook ↗</a>
+        <a class="btn btn-primary reveal"
+          href="https://www.facebook.com/share/19uXb3B98p/"
+          target="_blank" rel="noopener noreferrer">
+          Suivre l'association sur Facebook ↗
+        </a>
       </div>
     </section>
   </main>
@@ -90,14 +85,148 @@
     </div>
   </footer>
 
-  <a class="btn floating-donate" href="faire-un-don.html" aria-label="Faire un don à l'association">♡ Faire un don</a>
+  <a class="btn floating-donate" href="faire-un-don.html"
+    aria-label="Faire un don à l'association">♡ Faire un don</a>
 
   <div class="photo-modal" aria-hidden="true" role="dialog" aria-label="Photo agrandie">
     <button type="button" aria-label="Fermer la photo">×</button>
     <img src="" alt="">
   </div>
 
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const dossier = "_nouvelles";
+    const depot = "ded0um/ob";
+    const liste = document.getElementById("liste-nouvelles");
+
+    function echapper(texte) {
+      return String(texte || "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[c]);
+    }
+
+    function lireChamp(texte, nom) {
+      const resultat = texte.match(
+        new RegExp("^" + nom + ":\\\\s*(.*)$", "m")
+      );
+      if (!resultat) return "";
+      return resultat[1].trim().replace(/^["']|["']$/g, "");
+    }
+
+    function convertirTexte(texte) {
+      return texte
+        .split(/\n\s*\n/)
+        .map(paragraphe => {
+          const contenu = echapper(paragraphe.trim())
+            .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\*(.+?)\*/g, "<em>$1</em>")
+            .replace(/\n/g, "<br>");
+          return contenu ? "<p>" + contenu + "</p>" : "";
+        })
+        .join("");
+    }
+
+    function afficherArticle(fichier) {
+      const brut = atob(fichier.content.replace(/\n/g, ""));
+      const octets = Uint8Array.from(brut, c => c.charCodeAt(0));
+      const texte = new TextDecoder("utf-8").decode(octets);
+
+      const correspondance = texte.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+      if (!correspondance) return "";
+
+      const meta = correspondance[1];
+      const corps = correspondance[2].trim();
+      const titre = lireChamp(meta, "title") || "Nouvelle de l'association";
+      const date = lireChamp(meta, "date");
+      const image = lireChamp(meta, "image");
+      const image2 = lireChamp(meta, "image2");
+
+      function cheminImage(chemin) {
+        if (!chemin) return "";
+        if (/^https?:\/\//i.test(chemin)) return chemin;
+        return chemin.startsWith("/")
+          ? "https://ded0um.github.io/ob" + chemin
+          : chemin;
+      }
+
+      function baliseImage(chemin, description) {
+        if (!chemin) return "";
+        const src = cheminImage(chemin);
+        return '<img class="news-image" src="' + echapper(src) +
+          '" alt="' + echapper(description) +
+          '" loading="lazy">';
+      }
+
+      const dateAffichee = date
+        ? new Date(date + "T12:00:00").toLocaleDateString("fr-FR")
+        : "";
+
+      return `
+        <article class="news-card reveal">
+          ${dateAffichee ? `<div class="news-date">${echapper(dateAffichee)}</div>` : ""}
+          <h2>${echapper(titre)}</h2>
+          ${baliseImage(image, titre)}
+          <div class="news-body">${convertirTexte(corps)}</div>
+          ${image2 ? baliseImage(image2, titre) : ""}
+        </article>
+      `;
+    }
+
+    async function chargerNouvelles() {
+      try {
+        const reponse = await fetch(
+          "https://api.github.com/repos/" + depot + "/contents/" + dossier
+        );
+
+        if (reponse.status === 404) {
+          liste.innerHTML =
+            "<p>Les premières nouvelles de l'association seront bientôt publiées ici.</p>";
+          return;
+        }
+
+        if (!reponse.ok) throw new Error("Chargement impossible");
+
+        const fichiers = await reponse.json();
+        const markdowns = fichiers.filter(f => f.name.endsWith(".md"));
+
+        const articles = await Promise.all(
+          markdowns.map(async fichier => {
+            const contenu = await fetch(fichier.download_url);
+            if (!contenu.ok) return "";
+            const texte = await contenu.text();
+
+            return afficherArticle({
+              content: btoa(
+                Array.from(new TextEncoder().encode(texte),
+                  b => String.fromCharCode(b)).join("")
+              )
+            });
+          })
+        );
+
+        const visibles = articles.filter(Boolean);
+
+        if (!visibles.length) {
+          liste.innerHTML =
+            "<p>Les premières nouvelles de l'association seront bientôt publiées ici.</p>";
+          return;
+        }
+
+        liste.innerHTML = visibles.reverse().join("");
+      } catch (erreur) {
+        liste.innerHTML =
+          "<p>Les nouvelles ne peuvent pas être chargées pour le moment. Merci de réessayer plus tard.</p>";
+      }
+    }
+
+    chargerNouvelles();
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>
